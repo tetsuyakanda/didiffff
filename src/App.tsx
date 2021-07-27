@@ -1,7 +1,15 @@
 import React from 'react';
 import logo from './logo.svg';
 
-import { CssBaseline, ThemeProvider, AppBar, Toolbar, Typography, Paper } from '@material-ui/core';
+import {
+  CssBaseline,
+  ThemeProvider,
+  AppBar,
+  Toolbar,
+  Typography,
+  Paper,
+  Drawer,
+} from '@material-ui/core';
 import { styled } from '@material-ui/core/styles';
 
 import theme from './theme';
@@ -11,33 +19,48 @@ const MyPaper = styled(Paper)({
   margin: '20px',
 });
 
+const MyAppBar = styled(AppBar)({
+  zIndex: theme.zIndex.drawer + 1,
+});
+
+const MyDrawer = styled(Drawer)({
+  width: '200px',
+  flexShrink: 0,
+});
+
+const Root = styled('div')({
+  display: 'flex',
+});
+
 function App() {
   return (
-    <div className="App">
+    <Root className="App">
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        <AppBar position="static">
+        <MyAppBar position="fixed">
           <Toolbar>
             <Typography variant="h6" className="title">
               dIDifFFf
             </Typography>
           </Toolbar>
-        </AppBar>
-        <MyPaper className="App-header">
-          <p>
-            Edit <code>src/App.tsx</code> and save to reloadoooo.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </MyPaper>
+        </MyAppBar>
+        <MyDrawer variant="permanent">
+          <Toolbar />
+          <div>
+            <MyPaper>File Tree</MyPaper>
+          </div>
+        </MyDrawer>
+        <main>
+          <Toolbar />
+          <MyPaper className="App-header">
+            <p>Source Code</p>
+          </MyPaper>{' '}
+          <MyPaper className="App-header">
+            <p>Source Code</p>
+          </MyPaper>
+        </main>
       </ThemeProvider>
-    </div>
+    </Root>
   );
 }
 
