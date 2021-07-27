@@ -1,26 +1,15 @@
 import React from 'react';
-import logo from './logo.svg';
 
-import {
-  CssBaseline,
-  ThemeProvider,
-  AppBar,
-  Toolbar,
-  Typography,
-  Paper,
-  Drawer,
-} from '@material-ui/core';
+import { CssBaseline, ThemeProvider, Toolbar, Paper, Drawer } from '@material-ui/core';
 import { styled } from '@material-ui/core/styles';
 
-import theme from './theme';
+import AppHeader from './components/organisms/AppHeader';
+
+import theme from 'theme';
 
 const MyPaper = styled(Paper)({
   padding: '20px',
   margin: '20px',
-});
-
-const MyAppBar = styled(AppBar)({
-  zIndex: theme.zIndex.drawer + 1,
 });
 
 const MyDrawer = styled(Drawer)({
@@ -37,13 +26,7 @@ function App() {
     <Root className="App">
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        <MyAppBar position="fixed">
-          <Toolbar>
-            <Typography variant="h6" className="title">
-              dIDifFFf
-            </Typography>
-          </Toolbar>
-        </MyAppBar>
+        <AppHeader />
         <MyDrawer variant="permanent">
           <Toolbar />
           <div>
