@@ -3,7 +3,8 @@ import React from 'react';
 import { CssBaseline, ThemeProvider, Toolbar, Paper, Drawer } from '@material-ui/core';
 import { styled } from '@material-ui/core/styles';
 
-import AppHeader from './components/organisms/AppHeader';
+import AppHeader from 'components/organisms/AppHeader';
+import FileTree from 'components/organisms/FileTree';
 
 import theme from 'theme';
 
@@ -32,6 +33,7 @@ function App() {
           <div>
             <MyPaper>File Tree</MyPaper>
           </div>
+          <FileTree />
         </MyDrawer>
         <main>
           <Toolbar />
