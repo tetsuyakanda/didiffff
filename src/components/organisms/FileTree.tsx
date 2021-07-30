@@ -1,14 +1,20 @@
 import React from 'react';
 import { TreeView, TreeItem } from '@material-ui/lab';
-
-import z from 'assets/proj1/fileinfo.json';
+import { fetchFileInfo } from 'nod4japi/api';
 
 const FileTree = () => {
-  console.log(z.content);
+  const zz = fetchFileInfo('proj1');
+  zz.then((result) => {
+    if (!result) {
+      throw new Error('Unknown project');
+    }
+    console.log(result);
+  });
+
   return (
     <TreeView defaultCollapseIcon="⊟" defaultExpandIcon="⊞">
-      <TreeItem nodeId="1" label={z.name}>
-        <TreeItem nodeId="2" label="Calendar" />
+      <TreeItem nodeId="1" label="ABC">
+        <TreeItem nodeId="2" label="Calendar2" />
         <TreeItem nodeId="3" label="Chrome" />
         <TreeItem nodeId="4" label="Webstorm" />
       </TreeItem>
