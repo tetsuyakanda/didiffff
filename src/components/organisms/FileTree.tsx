@@ -1,10 +1,33 @@
-import React, { Suspense, useEffect, useState } from 'react';
+import React, { Suspense, useState } from 'react';
 import { TreeView, TreeItem } from '@material-ui/lab';
 import usePromise from 'react-promise-suspense';
 import { fetchFileInfo } from 'nod4japi/api';
-import { ProjectModel } from 'nod4japi/project';
+import { ProjectItemDirectoryModel, ProjectModel } from 'nod4japi/project';
 
-const FileTreeHontai = () => {
+interface ProjectTreeProps {
+  dir: ProjectItemDirectoryModel;
+  parentNodeId: string;
+}
+
+const ProjectTreeItem = (props: ProjectTreeProps) => {
+  const { dir, parentNodeId } = props;
+  const children = dir.children;
+
+  return (
+    <TreeItem nodeId={parentNodeId} label={dir.name}>
+      {children.map((c, i) => {
+        const id = `${parentNodeId}-${i}`;
+        if (c.type === 'dir') {
+          return <ProjectTreeItem dir={c} parentNodeId={id} />;
+        } else {
+          return <TreeItem nodeId={id} label={c.name} />;
+        }
+      })}
+    </TreeItem>
+  );
+};
+
+const ProjectTree = () => {
   const initialProject: ProjectModel = usePromise(fetchFileInfo, ['proj1']);
 
   const [project, setProject] = useState(initialProject);
@@ -21,31 +44,15 @@ const FileTreeHontai = () => {
   }
 
   return (
-    <div>
-      <div onClick={update}>a</div>
-      <TreeView defaultCollapseIcon="⊟" defaultExpandIcon="⊞">
-        <TreeItem nodeId="1" label={project._rootDir.name}>
-          <TreeItem nodeId="2" label="Calendar2" />
-          <TreeItem nodeId="3" label="Chrome" />
-          <TreeItem nodeId="4" label="Webstorm" />
-        </TreeItem>
-        <TreeItem nodeId="5" label="Documents">
-          <TreeItem nodeId="10" label="OSS" />
-          <TreeItem nodeId="6" label="Material-UI">
-            <TreeItem nodeId="7" label="src">
-              <TreeItem nodeId="8" label="index.js" />
-              <TreeItem nodeId="9" label="tree-view.js" />
-            </TreeItem>
-          </TreeItem>
-        </TreeItem>
-      </TreeView>
-    </div>
+    <TreeView defaultCollapseIcon="⊟" defaultExpandIcon="⊞">
+      <ProjectTreeItem dir={project._rootDir} parentNodeId="0" />
+    </TreeView>
   );
 };
 
 const FileTree = () => (
   <Suspense fallback={<p>Loading...</p>}>
-    <FileTreeHontai />
+    <ProjectTree />
   </Suspense>
 );
 
