@@ -1,3 +1,5 @@
+// https://github.com/k-shimari/nod4j/blob/v0.2.3/src/main/frontend/src/app/models/varListData.ts
+
 /**
  * The information about the highlightable variable.
  */

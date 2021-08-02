@@ -1,3 +1,5 @@
+// https://github.com/k-shimari/nod4j/blob/v0.2.3/src/main/frontend/src/app/models/api.ts
+
 import { ProjectItemDirectory, ProjectModel } from './project';
 import { VarListJsonData } from './varListData';
 
