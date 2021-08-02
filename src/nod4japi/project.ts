@@ -132,7 +132,7 @@ export type ProjectItem = ProjectItemFile | ProjectItemDirectory;
 export type ProjectItemModel = ProjectItemFile | ProjectItemDirectoryModel;
 
 export class ProjectModel {
-  private _rootDir: ProjectItemDirectoryModel;
+  _rootDir: ProjectItemDirectoryModel;
 
   constructor(rootDir: ProjectItemDirectory) {
     this._rootDir = new ProjectItemDirectoryModel(rootDir);
