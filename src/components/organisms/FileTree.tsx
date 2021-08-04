@@ -2,29 +2,28 @@ import React, { Suspense, useState } from 'react';
 import { TreeView, TreeItem } from '@material-ui/lab';
 import usePromise from 'react-promise-suspense';
 import { fetchFileInfo } from 'nod4japi/api';
-import { ProjectItemDirectoryModel, ProjectModel } from 'nod4japi/project';
+import { ProjectItemModel, ProjectModel } from 'nod4japi/project';
 
 interface ProjectTreeProps {
-  dir: ProjectItemDirectoryModel;
-  parentNodeId: string;
+  content: ProjectItemModel;
+  nodeId: string;
 }
 
 const ProjectTreeItem = (props: ProjectTreeProps) => {
-  const { dir, parentNodeId } = props;
-  const children = dir.children;
+  const { content, nodeId } = props;
 
-  return (
-    <TreeItem nodeId={parentNodeId} label={dir.name}>
-      {children.map((c, i) => {
-        const id = `${parentNodeId}-${i}`;
-        if (c.type === 'dir') {
-          return <ProjectTreeItem dir={c} parentNodeId={id} />;
-        } else {
-          return <TreeItem nodeId={id} label={c.name} />;
-        }
-      })}
-    </TreeItem>
-  );
+  if (content.type === 'dir') {
+    const children = content.children.map((c, i) => {
+      const id = `${nodeId}-${i}`;
+      return <ProjectTreeItem content={c} nodeId={id} key={id} />;
+    });
+
+    return (
+      <TreeItem nodeId={nodeId} label={content.name}>
+        {children}
+      </TreeItem>
+    );
+  } else return <TreeItem nodeId={nodeId} label={content.name} />;
 };
 
 const ProjectTree = () => {
@@ -45,7 +44,7 @@ const ProjectTree = () => {
 
   return (
     <TreeView defaultCollapseIcon="⊟" defaultExpandIcon="⊞">
-      <ProjectTreeItem dir={project._rootDir} parentNodeId="0" />
+      <ProjectTreeItem content={project._rootDir} nodeId="0" />
     </TreeView>
   );
 };
