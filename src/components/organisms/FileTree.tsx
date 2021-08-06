@@ -3,6 +3,7 @@ import { TreeView, TreeItem } from '@material-ui/lab';
 import usePromise from 'react-promise-suspense';
 import { fetchFileInfo } from 'nod4japi/api';
 import { ProjectItemModel, ProjectModel } from 'nod4japi/project';
+import FileTreeItem from './FileTreeItem';
 
 interface ProjectTreeProps {
   content: ProjectItemModel;
@@ -23,7 +24,7 @@ const ProjectTreeItem = (props: ProjectTreeProps) => {
         {children}
       </TreeItem>
     );
-  } else return <TreeItem nodeId={nodeId} label={content.name} />;
+  } else return <FileTreeItem nodeId={nodeId} content={content} />;
 };
 
 const ProjectTree = () => {
