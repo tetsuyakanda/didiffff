@@ -8,15 +8,17 @@ import FileTreeItem from './FileTreeItem';
 interface ProjectTreeProps {
   content: ProjectItemModel;
   nodeId: string;
+  path: string;
 }
 
 const ProjectTreeItem = (props: ProjectTreeProps) => {
-  const { content, nodeId } = props;
+  const { content, nodeId, path } = props;
 
   if (content.type === 'dir') {
     const children = content.children.map((c, i) => {
       const id = `${nodeId}-${i}`;
-      return <ProjectTreeItem content={c} nodeId={id} key={id} />;
+      const nPath = `${path}/${c.name}`;
+      return <ProjectTreeItem content={c} nodeId={id} key={id} path={nPath} />;
     });
 
     return (
@@ -24,7 +26,7 @@ const ProjectTreeItem = (props: ProjectTreeProps) => {
         {children}
       </TreeItem>
     );
-  } else return <FileTreeItem nodeId={nodeId} content={content} />;
+  } else return <FileTreeItem nodeId={nodeId} content={content} path={path} />;
 };
 
 const ProjectTree = () => {
@@ -43,9 +45,11 @@ const ProjectTree = () => {
     });
   }
 
+  const root = project._rootDir;
+
   return (
     <TreeView defaultCollapseIcon="⊟" defaultExpandIcon="⊞">
-      <ProjectTreeItem content={project._rootDir} nodeId="0" />
+      <ProjectTreeItem content={root} nodeId="0" path={root.name} />
     </TreeView>
   );
 };

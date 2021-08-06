@@ -7,14 +7,13 @@ import NazonoTreeItem from 'components/atoms/NazonoTreeItem';
 interface FileTreeProps {
   content: ProjectItemFile;
   nodeId: string;
+  path: string;
 }
 
-const FileTreeItem = ({ content, nodeId }: FileTreeProps) => {
-  const { selectedFile, selectFile } = useContext(SelectedFile);
-  const o = (a: string) => {
-    selectFile(a);
-  };
-  return <NazonoTreeItem nodeId={nodeId} label={content.name} onClick={() => o(content.name)} />;
+const FileTreeItem = ({ content, nodeId, path }: FileTreeProps) => {
+  const { selectFile } = useContext(SelectedFile);
+  const handleClick = () => selectFile(path);
+  return <NazonoTreeItem nodeId={nodeId} label={content.name} onClick={() => handleClick()} />;
 };
 
 export default FileTreeItem;
