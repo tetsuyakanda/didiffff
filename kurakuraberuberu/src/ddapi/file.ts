@@ -8,33 +8,32 @@ export function diffFile(f1: ProjectItemFile, f2: ProjectItemFile) {
   const c2 = f2.content;
   const d = diffArrays(c1, c2);
   console.log(d);
-  const result1: Line[] = [];
-  const result2: Line[] = [];
+
+  const result: Line[] = [];
+  let ln1 = 1;
+  let ln2 = 1;
   for (const dd of d) {
-    if (!dd.added) {
-      dd.value.forEach((text) => {
-        const line: Line = { value: text, changed: dd.removed || false };
-        result1.push(line);
-      });
-    }
-    if (!dd.removed) {
-      dd.value.forEach((text) => {
-        const line: Line = { value: text, changed: dd.added || false };
-        result2.push(line);
-      });
-    }
+    const lines = dd.value.map((text) => {
+      const line: Line = {
+        value: text,
+        lineno1: !dd.added ? ln1++ : undefined,
+        lineno2: !dd.removed ? ln2++ : undefined,
+      };
+      return line;
+    });
+    result.push(...lines);
   }
-  console.log(result1);
-  console.log(result2);
+
+  console.log(result);
 }
 
 export interface ProjectDiffFile extends ProjectItemBase {
   type: 'file';
-  content1: Line[];
-  content2: Line[];
+  content: Line[];
 }
 
 interface Line {
   value: string;
-  changed: boolean;
+  lineno1?: number;
+  lineno2?: number;
 }
