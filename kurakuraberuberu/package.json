@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "description": "",
   "private": true,
-  "main": "mian.js",
+  "main": "out/mian.js",
   "types": "main.d.ts",
   "scripts": {
     "build": "tsc",
@@ -14,9 +14,11 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
+    "diff": "^5.0.0",
     "typescript": "^4.3.5"
   },
   "devDependencies": {
+    "@types/diff": "^5.0.1",
     "@types/node": "^16.6.2",
     "eslint": "^7.32.0",
     "eslint-config-prettier": "^8.3.0",

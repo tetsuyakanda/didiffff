@@ -130,24 +130,3 @@ export class ProjectItemDirectoryModel implements ProjectItemDirectory {
 
 export type ProjectItem = ProjectItemFile | ProjectItemDirectory;
 export type ProjectItemModel = ProjectItemFile | ProjectItemDirectoryModel;
-
-export class ProjectModel {
-  _rootDir: ProjectItemDirectoryModel;
-
-  constructor(rootDir: ProjectItemDirectory) {
-    this._rootDir = new ProjectItemDirectoryModel(rootDir);
-  }
-
-  /**
-   * @param dirs
-   * This function returns the contents (file and direcoty) of the specified directory.
-   */
-  getItems(dirs: string[]): ProjectItemModel[] {
-    const targetDir = this._rootDir.recursiveFindDir(dirs);
-    if (targetDir) {
-      return targetDir.children;
-    } else {
-      return [];
-    }
-  }
-}
