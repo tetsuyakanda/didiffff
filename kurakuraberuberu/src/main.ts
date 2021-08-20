@@ -1,7 +1,11 @@
-import { ProjectItemDirectory, ProjectModel } from "./nod4japi/project";
+import { ProjectItemDirectory, ProjectModel } from './nod4japi/project';
 
 const main = () => {
-    console.log("a");
+  if (process.argv.length != 2) {
+    console.log('OK');
+  } else {
+    console.log('NG');
+  }
 };
 
 main();
