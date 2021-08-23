@@ -9,6 +9,7 @@ export function diffFile(f1: ProjectItemFile, f2: ProjectItemFile) {
   const d = diffArrays(c1, c2);
   console.log(d);
 
+  // 行単位のdiffをとって、行番号をカウントしながら保存
   const result: Line[] = [];
   let ln1 = 1;
   let ln2 = 1;
@@ -23,8 +24,7 @@ export function diffFile(f1: ProjectItemFile, f2: ProjectItemFile) {
     });
     result.push(...lines);
   }
-
-  console.log(result);
+  //console.log(result);
 }
 
 export interface ProjectDiffFile extends ProjectItemBase {

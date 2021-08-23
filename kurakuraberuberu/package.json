@@ -11,7 +11,7 @@
     "wooo": "npm run build && node ./out/main.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
+  "author": "Kanda, Tetsuya <t-kanda@ist.osaka-u.ac.jp>",
   "license": "MIT",
   "dependencies": {
     "diff": "^5.0.0",
@@ -23,5 +23,8 @@
     "eslint": "^7.32.0",
     "eslint-config-prettier": "^8.3.0",
     "prettier": "^2.3.2"
+  },
+  "bin": {
+    "kurakuraberuberu": "./bin/main.js"
   }
 }
