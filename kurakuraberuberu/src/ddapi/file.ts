@@ -4,7 +4,7 @@ import { diffArrays } from 'diff';
 /**
  * ファイル間のdiffをとって格納
  */
-export function diffFile(f1: ProjectItemFile, f2: ProjectItemFile): ProjectDiffFileModel {
+export function diffFile(f1: ProjectItemFile, f2: ProjectItemFile): ProjectDiffFile {
   const c1 = f1.content;
   const c2 = f2.content;
   const d = diffArrays(c1, c2);
@@ -25,32 +25,12 @@ export function diffFile(f1: ProjectItemFile, f2: ProjectItemFile): ProjectDiffF
     result.push(...lines);
   }
 
-  return new ProjectDiffFileModel({ type: 'file', content: result, name: f1.name });
+  return { type: 'file', content: result, name: f1.name };
 }
 
 export interface ProjectDiffFile extends ProjectItemBase {
   type: 'file';
   content: Line[];
-}
-
-class ProjectDiffFileModel implements ProjectDiffFile {
-  private _file: ProjectDiffFile;
-
-  get type() {
-    return this._file.type;
-  }
-
-  get name() {
-    return this._file.name;
-  }
-
-  get content() {
-    return this._file.content;
-  }
-
-  constructor(file: ProjectDiffFile) {
-    this._file = file;
-  }
 }
 
 interface Line {
