@@ -1,11 +1,12 @@
 import React, { useContext } from 'react';
 
+import { ProjectDiffFile } from 'kurakuraberuberu';
+
 import { SelectedFile } from 'App';
-import { ProjectItemFile } from 'nod4japi/project';
 import NazonoTreeItem from 'components/atoms/NazonoTreeItem';
 
 interface FileTreeProps {
-  content: ProjectItemFile;
+  content: ProjectDiffFile;
   nodeId: string;
   path: string;
 }

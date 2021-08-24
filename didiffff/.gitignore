@@ -24,4 +24,4 @@ yarn-error.log*
 
 # project-specific
 
-src/assets/*
+public/assets/*

@@ -1,12 +1,14 @@
-import React, { Suspense, useState } from 'react';
+import React, { Suspense } from 'react';
 import { TreeView, TreeItem } from '@material-ui/lab';
 import usePromise from 'react-promise-suspense';
-import { fetchFileInfo } from 'nod4japi/api';
-import { ProjectItemModel, ProjectModel } from 'nod4japi/project';
+
+import { ProjectDItem } from 'kurakuraberuberu';
+
+import { fetchTargetInfo } from 'ddapi/api';
 import FileTreeItem from './FileTreeItem';
 
 interface ProjectTreeProps {
-  content: ProjectItemModel;
+  content: ProjectDItem;
   nodeId: string;
   path: string;
 }
@@ -30,22 +32,7 @@ const ProjectTreeItem = (props: ProjectTreeProps) => {
 };
 
 const ProjectTree = () => {
-  const initialProject: ProjectModel = usePromise(fetchFileInfo, ['proj1']);
-
-  const [project, setProject] = useState(initialProject);
-
-  function update() {
-    const zz = fetchFileInfo('proj2');
-    zz.then((result) => {
-      if (!result) {
-        throw new Error('Unknown project');
-      }
-      setProject(result);
-      console.log('click');
-    });
-  }
-
-  const root = project._rootDir;
+  const root: ProjectDItem = usePromise(fetchTargetInfo, []);
 
   return (
     <TreeView defaultCollapseIcon="⊟" defaultExpandIcon="⊞">
