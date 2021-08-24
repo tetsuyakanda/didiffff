@@ -1,10 +1,10 @@
-import { ProjectItem, ProjectItemDirectory, ProjectItemFile } from './nod4japi/project';
+import { ProjectItemDirectory } from './nod4japi/project';
 import * as fs from 'fs';
 import { argv, exit } from 'process';
 import { visit } from './ddapi/projectVisitor';
 
 const main = () => {
-  if (process.argv.length != 4) {
+  if (process.argv.length != 5) {
     console.log(process.argv.length);
     exit(1);
   }
@@ -13,7 +13,8 @@ const main = () => {
   const f2 = fs.readFileSync(argv[3], 'utf8');
   const ff2 = JSON.parse(f2, receiver) as ProjectItemDirectory;
 
-  visit(ff1, ff2);
+  const result = visit(ff1, ff2);
+  fs.writeFileSync(argv[4], JSON.stringify(result), 'utf8');
 };
 
 /**

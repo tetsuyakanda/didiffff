@@ -3,8 +3,8 @@
   "version": "0.1.0",
   "description": "",
   "private": true,
-  "main": "out/mian.js",
-  "types": "main.d.ts",
+  "main": "out/index.js",
+  "types": "out/index.d.ts",
   "scripts": {
     "build": "tsc",
     "prepare": "npm run build",

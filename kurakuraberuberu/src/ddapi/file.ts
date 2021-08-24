@@ -1,13 +1,13 @@
 import { ProjectItemBase, ProjectItemFile } from '../nod4japi/project';
-import { ArrayChange, diffArrays } from 'diff';
+import { diffArrays } from 'diff';
 
-export function diffFile(f1: ProjectItemFile, f2: ProjectItemFile) {
-  console.log(f1.name);
-  console.log(f2.name);
+/**
+ * ファイル間のdiffをとって格納
+ */
+export function diffFile(f1: ProjectItemFile, f2: ProjectItemFile): ProjectDiffFileModel {
   const c1 = f1.content;
   const c2 = f2.content;
   const d = diffArrays(c1, c2);
-  console.log(d);
 
   // 行単位のdiffをとって、行番号をカウントしながら保存
   const result: Line[] = [];
@@ -24,12 +24,33 @@ export function diffFile(f1: ProjectItemFile, f2: ProjectItemFile) {
     });
     result.push(...lines);
   }
-  //console.log(result);
+
+  return new ProjectDiffFileModel({ type: 'file', content: result, name: f1.name });
 }
 
 export interface ProjectDiffFile extends ProjectItemBase {
   type: 'file';
   content: Line[];
+}
+
+class ProjectDiffFileModel implements ProjectDiffFile {
+  private _file: ProjectDiffFile;
+
+  get type() {
+    return this._file.type;
+  }
+
+  get name() {
+    return this._file.name;
+  }
+
+  get content() {
+    return this._file.content;
+  }
+
+  constructor(file: ProjectDiffFile) {
+    this._file = file;
+  }
 }
 
 interface Line {

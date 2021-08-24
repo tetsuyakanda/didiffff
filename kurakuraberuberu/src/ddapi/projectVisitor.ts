@@ -1,62 +1,67 @@
-import { ProjectItem, ProjectItemDirectory, ProjectItemFile } from '../nod4japi/project';
-import { diffFile } from './file';
+import {
+  ProjectItem,
+  ProjectItemBase,
+  ProjectItemDirectory,
+  ProjectItemFile,
+} from '../nod4japi/project';
+import { diffFile, ProjectDiffFile } from './file';
 
 export function visit(d1: ProjectItemDirectory, d2: ProjectItemDirectory) {
-  compareDir(d1, d2);
-
-  //   const s1 = d1.children[1] as ProjectItemDirectory;
-  //   const ss1 = s1.children[0] as ProjectItemDirectory;
-  //   const sss1 = ss1.children[0] as ProjectItemFile;
-  //   const s2 = d2.children[1] as ProjectItemDirectory;
-  //   const ss2 = s2.children[0] as ProjectItemDirectory;
-  //   const sss2 = ss2.children[0] as ProjectItemFile;
-  //   diffFile(sss1, sss2);
+  const r = compareDir(d1, d2);
+  return r;
 }
 
-function compareDir(i1: ProjectItemDirectory, i2: ProjectItemDirectory) {
-  console.log('*** compare item ***');
-  console.log(i1);
-  console.log(i2);
-
-  const d1item = i1.children;
-  const d2item = i2.children;
-  const [d1files, d1dirs] = fdPart(d1item);
-  const [d2files, d2dirs] = fdPart(d2item);
-  compareDirs(d1dirs, d2dirs);
+// ディレクトリの内容を（ファイル名ベースで）比較
+function compareDir(d1: ProjectItemDirectory, d2: ProjectItemDirectory): ProjectDItem {
+  const [d1files, d1dirs] = fdPart(d1.children);
+  const [d2files, d2dirs] = fdPart(d2.children);
+  const files = compareFiles(d1files, d2files);
+  const dirs = compareDirs(d1dirs, d2dirs);
+  return {
+    type: 'dir',
+    name: d1.name,
+    children: dirs.concat(files),
+  };
 }
 
+// ディレクトリリストを比較して、同名ディレクトリなら処理を続行
 function compareDirs(ds1: ProjectItemDirectory[], ds2: ProjectItemDirectory[]) {
-  console.log('*** compare dirs ***');
-  console.log(ds1);
-  console.log(ds2);
   const { i1only, i2only, both } = andOr(ds1, ds2);
-  console.log(i1only);
-  console.log(i2only);
-  console.log(both);
-  both.forEach(([i1, i2]) => compareDir(i1, i2));
+  // ToDo: 片方にしか存在しないディレクトリの処理
+  return both.map(([d1, d2]) => compareDir(d1, d2));
 }
 
-interface andOrResult<T extends ProjectItem> {
+// ファイルリストを比較して、同名ファイルのdiffをとる
+function compareFiles(fs1: ProjectItemFile[], fs2: ProjectItemFile[]) {
+  const { i1only, i2only, both } = andOr(fs1, fs2);
+  // ToDo: 片方にしか存在しないファイルの処理
+  return both.map(([f1, f2]) => diffFile(f1, f2));
+}
+
+interface andOrResult<T extends ProjectItemBase> {
   i1only: T[];
   i2only: T[];
   both: [T, T][];
 }
 
-function andOr<T extends ProjectItem>(i1: T[], i2: T[]): andOrResult<T> {
+// ベン図をかく
+function andOr<T extends ProjectItemBase>(i1: T[], i2: T[]): andOrResult<T> {
   const i1names = i1.map((i) => i.name);
   const i2names = i2.map((i) => i.name);
   const i1only = i1.filter((i) => !i2names.includes(i.name));
   const i2only = i2.filter((i) => !i1names.includes(i.name));
-  const bothNames = i1names.filter((i) => i2names.includes(i));
-  const both = bothNames.map((name) => {
-    const ia1 = getItem(name, i1);
-    const ia2 = getItem(name, i2);
-    return [ia1, ia2] as [T, T];
-  });
+  // 同名アイテムはペアにする
+  const both = i1names
+    .filter((i) => i2names.includes(i))
+    .map((name) => {
+      const ia1 = getItem(name, i1);
+      const ia2 = getItem(name, i2);
+      return [ia1, ia2] as [T, T];
+    });
   return { i1only, i2only, both };
 }
 
-function getItem(name: string, i: ProjectItem[]) {
+function getItem<T extends ProjectItemBase>(name: string, i: T[]) {
   for (const ii of i) {
     if (ii.name === name) return ii;
   }
@@ -71,3 +76,10 @@ function fdPart(items: ProjectItem[]): [ProjectItemFile[], ProjectItemDirectory[
     [[], []]
   );
 }
+
+interface ProjectDDirectory extends ProjectItemBase {
+  type: 'dir';
+  children: ProjectDItem[];
+}
+
+export type ProjectDItem = ProjectDiffFile | ProjectDDirectory;
