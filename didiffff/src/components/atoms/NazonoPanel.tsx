@@ -9,7 +9,7 @@ const MyPaper = styled(Paper)({
 });
 
 interface Props {
-  text: string;
+  text: string | JSX.Element;
 }
 
 const NazonoPanel = ({ text }: Props) => <MyPaper>{text}</MyPaper>;

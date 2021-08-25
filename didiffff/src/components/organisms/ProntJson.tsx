@@ -3,6 +3,7 @@ import React, { useContext } from 'react';
 import { SelectedFile } from 'App';
 import NazonoPanel from 'components/atoms/NazonoPanel';
 import { ProjectDDirectoryItem } from 'ddapi/api';
+import CodeLine from 'components/atoms/CodeLine';
 
 interface PrintJsonProps {
   root: ProjectDDirectoryItem;
@@ -21,8 +22,17 @@ const PrintJson = (props: PrintJsonProps) => {
     if (!targFile) {
       return <NazonoPanel text={'not found'} />;
     } else {
-      const k = JSON.stringify(targFile);
-      return <NazonoPanel text={k} />;
+      const lines = targFile.content;
+      const codeLines = (
+        <pre>
+          <code>
+            {lines.map((l) => (
+              <CodeLine line={l} key={l.lineno1} />
+            ))}
+          </code>
+        </pre>
+      );
+      return <NazonoPanel text={codeLines} />;
     }
   }
 };

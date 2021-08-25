@@ -48,20 +48,14 @@ export class ProjectDDirectoryItem implements ProjectDDirectory {
   }
 
   findFile2(path: string[]): ProjectDiffFile | undefined {
-    console.log(path);
     if (path.length === 1) {
-      console.log('L');
-      console.log(path[0]);
       return this.children.find(
         (i): i is ProjectDiffFile => i.type === 'file' && i.name === path[0]
       );
     } else {
-      console.log('D');
-      console.log(path[0]);
       const targDir = this.children.find(
         (i): i is ProjectDDirectoryItem => i.type === 'dir' && i.name === path[0]
       );
-      console.log(targDir);
       return targDir?.findFile2(path.slice(1));
     }
   }

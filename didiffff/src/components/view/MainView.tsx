@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Toolbar, Paper, Drawer } from '@material-ui/core';
+import { Toolbar, Paper, Drawer, Container } from '@material-ui/core';
 import { styled } from '@material-ui/core/styles';
 import usePromise from 'react-promise-suspense';
 
@@ -38,11 +38,13 @@ const MainView = () => {
       </MyDrawer>
       <main>
         <Toolbar />
-        <NazonoView />
-        <MyPaper className="App-header">
-          <p>Source Code</p>
-        </MyPaper>
-        <PrintJson root={root} />
+        <Container maxWidth="sm">
+          <NazonoView />
+          <MyPaper>
+            <p>Source Code</p>
+          </MyPaper>
+          <PrintJson root={root} />
+        </Container>
       </main>
     </Root>
   );
