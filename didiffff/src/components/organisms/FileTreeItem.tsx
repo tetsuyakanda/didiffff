@@ -8,7 +8,7 @@ import NazonoTreeItem from 'components/atoms/NazonoTreeItem';
 interface FileTreeProps {
   content: ProjectDiffFile;
   nodeId: string;
-  path: string;
+  path: string[];
 }
 
 const FileTreeItem = ({ content, nodeId, path }: FileTreeProps) => {

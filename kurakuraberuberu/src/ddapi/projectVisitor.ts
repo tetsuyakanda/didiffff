@@ -12,11 +12,11 @@ export function visit(d1: ProjectItemDirectory, d2: ProjectItemDirectory) {
 }
 
 // ディレクトリの内容を（ファイル名ベースで）比較
-function compareDir(d1: ProjectItemDirectory, d2: ProjectItemDirectory): ProjectDItem {
+function compareDir(d1: ProjectItemDirectory, d2: ProjectItemDirectory): ProjectDDirectory {
   const [d1files, d1dirs] = fdPart(d1.children);
   const [d2files, d2dirs] = fdPart(d2.children);
-  const files = compareFiles(d1files, d2files);
-  const dirs = compareDirs(d1dirs, d2dirs);
+  const files: ProjectDItem[] = compareFiles(d1files, d2files);
+  const dirs: ProjectDItem[] = compareDirs(d1dirs, d2dirs);
   return {
     type: 'dir',
     name: d1.name,
@@ -77,7 +77,7 @@ function fdPart(items: ProjectItem[]): [ProjectItemFile[], ProjectItemDirectory[
   );
 }
 
-interface ProjectDDirectory extends ProjectItemBase {
+export interface ProjectDDirectory extends ProjectItemBase {
   type: 'dir';
   children: ProjectDItem[];
 }
