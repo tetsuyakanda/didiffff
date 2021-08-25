@@ -33,7 +33,7 @@ export interface ProjectDiffFile extends ProjectItemBase {
   content: Line[];
 }
 
-interface Line {
+export interface Line {
   value: string;
   lineno1?: number;
   lineno2?: number;
