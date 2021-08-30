@@ -20,7 +20,7 @@ function computeTokenId(variable: VarInfo, tokens: SourceCodeToken[]): string {
  * array with index refers the its contents (values, timestamps..)
  */
 //type VarValueDataInner = { [varId: string]: ValueListItemData[] | undefined };
-type VarValueDataInner = { [varId: string]: ValueListItemData[] | undefined };
+export type VarValueDataInner = { [varId: string]: ValueListItemData[] | undefined };
 
 /**
  * @param data is the all variable and value data of the target source file.
