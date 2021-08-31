@@ -1,11 +1,10 @@
 import React from 'react';
 
 import { styled } from '@material-ui/core';
-import { Line } from 'kurakuraberuberu';
-import { isPropertySignature } from 'typescript';
+import { LineWithValues } from 'kurakuraberuberu';
 
 interface Props {
-  line: Line;
+  line: LineWithValues;
 }
 
 const LineNo = styled('span')({

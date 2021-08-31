@@ -5,8 +5,7 @@ import {
   ProjectItemFileModel,
 } from '../nod4japi/project';
 import { VarListJsonData } from '../nod4japi/varListData';
-import { diffFile, ProjectDiffFile } from './diffFile';
-import { diffFile as diffFileX } from './fileVar';
+import { createDiffData, ProjectDiffFile } from './fileVar';
 
 export class ProjectVisitor {
   constructor(
@@ -48,8 +47,7 @@ export class ProjectVisitor {
   private compareFiles(fs1: ProjectItemFileModel[], fs2: ProjectItemFileModel[], path: string[]) {
     const { i1only, i2only, both } = andOr(fs1, fs2);
     // ToDo: 片方にしか存在しないファイルの処理
-    both.map(([f1, f2]) => diffFileX(f1, f2, this.v1, this.v2, path));
-    return both.map(([f1, f2]) => diffFile(f1, f2));
+    return both.map(([f1, f2]) => createDiffData(f1, f2, this.v1, this.v2, path));
   }
 }
 

@@ -1,2 +1,2 @@
-export * from './diffFile';
+export * from './fileVar';
 export * from './projectVisitor';

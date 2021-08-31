@@ -1,62 +1,58 @@
 import * as fs from 'fs';
 
 import { SourceCodeToken, tokenize } from '../nod4japi/javaLexer';
-import { ProjectItemFileModel } from '../nod4japi/project';
+import { ProjectItemBase, ProjectItemFileModel } from '../nod4japi/project';
 import { VarListJsonData } from '../nod4japi/varListData';
 import { createVarValueData, ValueListItemData, VarValueDataInner } from '../nod4japi/varValueData';
-import { createTokenWithValues, MyToken, spaceToken } from './token';
-import { diffFile as diffFileO } from './diffFile';
+import { createTokenWithValues, TokenWithValues } from './token';
+import { diffFile } from './diffFile';
 
-export function diffFile(
+export function createDiffData(
   f1: ProjectItemFileModel,
   f2: ProjectItemFileModel,
   v1: VarListJsonData,
   v2: VarListJsonData,
   path: string[]
-) {
-  console.log(path, f1.name);
-  const filePath = getFilePath(path, f1.name);
-  console.log(filePath);
-
+): ProjectDiffFile {
   const tokens1 = tokenize(f1.joinedContent);
   const tokens2 = tokenize(f2.joinedContent);
 
+  const filePath = getFilePath(path, f1.name);
   const vv1 = createVarValueData(v1, filePath, tokens1);
   const vv2 = createVarValueData(v2, filePath, tokens2);
 
   const tl1 = groupTokensByLine(tokens1);
   const tl2 = groupTokensByLine(tokens2);
 
-  const { content: dd } = diffFileO(f1, f2);
-  const r: TemporalLine[] = dd.map((l) => {
-    const tokens1 = l.lineno1 ? findValues(tl1[l.lineno1], vv1) : undefined;
-    const tokens2 = l.lineno2 ? findValues(tl2[l.lineno2], vv2) : undefined;
-    return { ...l, tokens1, tokens2 };
-  });
-  const rr: FLine[] = r.map((x) => {
-    console.log(x.value);
-    const m = mergeTokens(x);
-    console.log(m?.map((mm) => mm.image));
-    return { value: x.value, lineno1: x.lineno1, lineno2: x.lineno2, tokens: m };
+  // first, get unix diff of source code
+  const diff = diffFile(f1, f2);
+
+  const result: LineWithValues[] = diff.map((line) => {
+    const tokens1 = line.lineno1 ? findValues(tl1[line.lineno1], vv1) : undefined;
+    const tokens2 = line.lineno2 ? findValues(tl2[line.lineno2], vv2) : undefined;
+    return { ...line, tokens: mergeTokens(tokens1, tokens2) };
   });
 
-  fs.writeFileSync('tmp/r.json', JSON.stringify(rr), 'utf8');
+  // f1.name and f2.name might be same...
+  return { type: 'file', content: result, name: f1.name };
 }
 
-function mergeTokens(xline: TemporalLine) {
-  if (!xline.tokens2 && !xline.tokens1) {
+// check if we have two token list...
+function mergeTokens(tokens1?: TemporalToken[], tokens2?: TemporalToken[]) {
+  if (!tokens2 && !tokens1) {
     return [];
-  } else if (!xline.tokens2) {
-    return xline.tokens1?.map((t) => createTokenWithValues(t.token, t.value, undefined));
-  } else if (!xline.tokens1) {
-    return xline.tokens2?.map((t) => createTokenWithValues(t.token, undefined, t.value));
+  } else if (!tokens2) {
+    return tokens1?.map((t) => createTokenWithValues(t.token, t.value, undefined));
+  } else if (!tokens1) {
+    return tokens2?.map((t) => createTokenWithValues(t.token, undefined, t.value));
   } else {
-    return mergeTokens2(xline.tokens1, xline.tokens2);
+    return mergeTokens2(tokens1, tokens2);
   }
 }
 
+// concat two token list
 function mergeTokens2(tokens1: TemporalToken[], tokens2: TemporalToken[]) {
-  const result: MyToken[] = [];
+  const result: TokenWithValues[] = [];
   for (let i = 0; i < tokens1.length; i++) {
     const tv = createTokenWithValues(tokens1[i].token, tokens1[i].value, tokens2[i].value);
     result.push(tv);
@@ -64,11 +60,9 @@ function mergeTokens2(tokens1: TemporalToken[], tokens2: TemporalToken[]) {
   return result;
 }
 
+// find value data of specified token
 function findValues(t: SourceCodeToken[] | undefined, vv: VarValueDataInner) {
-  const tokens = t?.map((ti) => {
-    const tv = vv[ti.id];
-    return { token: ti, value: tv } as TemporalToken;
-  });
+  const tokens = t?.map((ti) => ({ token: ti, value: vv[ti.id] } as TemporalToken));
   return tokens;
 }
 
@@ -77,19 +71,16 @@ interface TemporalToken {
   value?: ValueListItemData[];
 }
 
-interface TemporalLine {
+export interface LineWithValues {
   value: string;
   lineno1?: number;
-  tokens1?: TemporalToken[];
   lineno2?: number;
-  tokens2?: TemporalToken[];
+  tokens?: TokenWithValues[];
 }
 
-interface FLine {
-  value: string;
-  lineno1?: number;
-  lineno2?: number;
-  tokens?: MyToken[];
+export interface ProjectDiffFile extends ProjectItemBase {
+  type: 'file';
+  content: LineWithValues[];
 }
 
 /**

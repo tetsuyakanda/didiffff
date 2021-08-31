@@ -1,10 +1,10 @@
-import { ProjectItemBase, ProjectItemFile } from '../nod4japi/project';
+import { ProjectItemFile } from '../nod4japi/project';
 import { diffArrays } from 'diff';
 
 /**
  * ファイル間のdiffをとって格納
  */
-export function diffFile(f1: ProjectItemFile, f2: ProjectItemFile): ProjectDiffFile {
+export function diffFile(f1: ProjectItemFile, f2: ProjectItemFile) {
   const c1 = f1.content;
   const c2 = f2.content;
   const d = diffArrays(c1, c2);
@@ -25,12 +25,7 @@ export function diffFile(f1: ProjectItemFile, f2: ProjectItemFile): ProjectDiffF
     result.push(...lines);
   }
 
-  return { type: 'file', content: result, name: f1.name };
-}
-
-export interface ProjectDiffFile extends ProjectItemBase {
-  type: 'file';
-  content: Line[];
+  return result;
 }
 
 export interface Line {

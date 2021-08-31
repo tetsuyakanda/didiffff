@@ -24,7 +24,7 @@
     "prettier": "^2.3.2"
   },
   "scripts": {
-    "load": "kurakuraberuberu ./public/assets/proj1/fileinfo.json ./public/assets/proj2/fileinfo.json ./public/assets/target.json",
+    "load": "kurakuraberuberu ./public/assets/proj1/fileinfo.json ./public/assets/proj2/fileinfo.json ./public/assets/proj1/varinfo.json ./public/assets/proj2/varinfo.json ./public/assets/target.json",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "eject": "react-scripts eject"
