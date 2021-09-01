@@ -24,11 +24,11 @@ export class ProjectVisitor {
     d1: ProjectItemDirectory,
     d2: ProjectItemDirectory,
     path: string[]
-  ): ProjectDDirectory {
+  ): ProjectDiffDirectory {
     const [d1files, d1dirs] = fdPart(d1.children);
     const [d2files, d2dirs] = fdPart(d2.children);
-    const files: ProjectDItem[] = this.compareFiles(d1files, d2files, path);
-    const dirs: ProjectDItem[] = this.compareDirs(d1dirs, d2dirs, path);
+    const files: ProjectDiffItem[] = this.compareFiles(d1files, d2files, path);
+    const dirs: ProjectDiffItem[] = this.compareDirs(d1dirs, d2dirs, path);
     return {
       type: 'dir',
       name: d1.name,
@@ -90,9 +90,9 @@ function fdPart(items: ProjectItem[]): [ProjectItemFileModel[], ProjectItemDirec
   );
 }
 
-export interface ProjectDDirectory extends ProjectItemBase {
+export interface ProjectDiffDirectory extends ProjectItemBase {
   type: 'dir';
-  children: ProjectDItem[];
+  children: ProjectDiffItem[];
 }
 
-export type ProjectDItem = ProjectDiffFile | ProjectDDirectory;
+export type ProjectDiffItem = ProjectDiffFile | ProjectDiffDirectory;

@@ -7,7 +7,7 @@ import usePromise from 'react-promise-suspense';
 import AppHeader from 'components/organisms/AppHeader';
 import FileTree from 'components/organisms/FileTree';
 import NazonoView from 'components/organisms/NazonoView';
-import { fetchTargetInfo, ProjectDDirectoryItem } from 'ddapi/api';
+import { fetchTargetInfo, ProjectDiffDirectoryItem } from 'ddapi/directory';
 import PrintJson from 'components/organisms/ProntJson';
 
 const MyPaper = styled(Paper)({
@@ -25,7 +25,7 @@ const Root = styled('div')({
 });
 
 const MainView = () => {
-  const root: ProjectDDirectoryItem = usePromise(fetchTargetInfo, []);
+  const root: ProjectDiffDirectoryItem = usePromise(fetchTargetInfo, []);
   return (
     <Root>
       <AppHeader />

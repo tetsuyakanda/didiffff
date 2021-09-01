@@ -1,4 +1,5 @@
-import { ProjectDDirectory, ProjectDiffFile } from 'kurakuraberuberu';
+import { ProjectDiffDirectory, ProjectDiffFile } from 'kurakuraberuberu';
+import { ProjectDiffFileItem } from './file';
 
 /**
  * Handle escaping double quotes of string, if the value is string.
@@ -23,14 +24,14 @@ function getAssetFile(path: string): Promise<string> {
 /**
  * parse and return the json, which contains the values of variable information
  */
-export async function fetchTargetInfo(projectName: string): Promise<ProjectDDirectoryItem> {
+export async function fetchTargetInfo(projectName: string): Promise<ProjectDiffDirectoryItem> {
   const varInfoPath = '/assets/target.json';
   const s: string = await getAssetFile(varInfoPath);
-  const json = JSON.parse(s, receiver) as ProjectDDirectory;
-  return new ProjectDDirectoryItem(json);
+  const json = JSON.parse(s, receiver) as ProjectDiffDirectory;
+  return new ProjectDiffDirectoryItem(json);
 }
 
-export class ProjectDDirectoryItem implements ProjectDDirectory {
+export class ProjectDiffDirectoryItem implements ProjectDiffDirectory {
   get type() {
     return this._dir.type;
   }
@@ -40,28 +41,30 @@ export class ProjectDDirectoryItem implements ProjectDDirectory {
   }
 
   get children() {
-    return this._dir.children.map((i) => (i.type === 'file' ? i : new ProjectDDirectoryItem(i)));
+    return this._dir.children.map((i) =>
+      i.type === 'file' ? new ProjectDiffFileItem(i) : new ProjectDiffDirectoryItem(i)
+    );
   }
 
-  findFile(path: string[]): ProjectDiffFile | undefined {
+  findFile(path: string[]): ProjectDiffFileItem | undefined {
     return this.findFile2(path.slice(1));
   }
 
-  findFile2(path: string[]): ProjectDiffFile | undefined {
+  findFile2(path: string[]): ProjectDiffFileItem | undefined {
     if (path.length === 1) {
       return this.children.find(
-        (i): i is ProjectDiffFile => i.type === 'file' && i.name === path[0]
+        (i): i is ProjectDiffFileItem => i.type === 'file' && i.name === path[0]
       );
     } else {
       const targDir = this.children.find(
-        (i): i is ProjectDDirectoryItem => i.type === 'dir' && i.name === path[0]
+        (i): i is ProjectDiffDirectoryItem => i.type === 'dir' && i.name === path[0]
       );
       return targDir?.findFile2(path.slice(1));
     }
   }
 
-  private _dir: ProjectDDirectory;
-  constructor(dir: ProjectDDirectory) {
+  private _dir: ProjectDiffDirectory;
+  constructor(dir: ProjectDiffDirectory) {
     this._dir = dir;
   }
 }

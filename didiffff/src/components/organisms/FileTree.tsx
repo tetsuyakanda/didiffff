@@ -1,13 +1,13 @@
 import React from 'react';
 import { TreeView, TreeItem } from '@material-ui/lab';
 
-import { ProjectDItem } from 'kurakuraberuberu';
+import { ProjectDiffItem } from 'kurakuraberuberu';
 
-import { ProjectDDirectoryItem } from 'ddapi/api';
+import { ProjectDiffDirectoryItem } from 'ddapi/directory';
 import FileTreeItem from './FileTreeItem';
 
 interface ProjectTreeItemProps {
-  content: ProjectDItem;
+  content: ProjectDiffItem;
   nodeId: string;
   path: string[];
 }
@@ -31,7 +31,7 @@ const ProjectTreeItem = (props: ProjectTreeItemProps) => {
 };
 
 interface FileTreeProps {
-  root: ProjectDDirectoryItem;
+  root: ProjectDiffDirectoryItem;
 }
 
 const FileTree = (props: FileTreeProps) => {

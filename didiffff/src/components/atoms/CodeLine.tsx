@@ -1,10 +1,11 @@
 import React from 'react';
 
 import { styled } from '@material-ui/core';
-import { LineWithValues } from 'kurakuraberuberu';
+import { LineWithValuesModel } from 'ddapi/file';
+import { DiffStatusLine } from 'ddapi/diffStatus';
 
 interface Props {
-  line: LineWithValues;
+  line: LineWithValuesModel;
 }
 
 const LineNo = styled('span')({
@@ -17,7 +18,7 @@ const LineNo = styled('span')({
 });
 
 type LineType = {
-  lineType: 'l1only' | 'l2only' | 'both';
+  lineType: DiffStatusLine;
 };
 
 const DL = styled(({ lineType, ...other }: LineType) => <span {...other} />)({
@@ -26,13 +27,12 @@ const DL = styled(({ lineType, ...other }: LineType) => <span {...other} />)({
 });
 
 const CodeLine = ({ line }: Props) => {
-  const { lineno1, lineno2, value } = line;
-  const lineType = !lineno1 ? 'l2only' : !lineno2 ? 'l1only' : 'both';
+  const { lineno1, lineno2, value, diffStatusLine } = line;
   return (
     <div>
       <LineNo>{lineno1}</LineNo>
       <LineNo>{lineno2}</LineNo>
-      <DL lineType={lineType}>{value}</DL>
+      <DL lineType={diffStatusLine}>{value}</DL>
     </div>
   );
 };
