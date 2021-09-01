@@ -27,7 +27,8 @@ const DL = styled(({ lineType, ...other }: LineType) => <span {...other} />)({
 });
 
 const CodeLine = ({ line }: Props) => {
-  const { lineno1, lineno2, value, diffStatusLine } = line;
+  const diffStatusLine = line.diffStatusLine();
+  const { lineno1, lineno2, value } = line;
   return (
     <div>
       <LineNo>{lineno1}</LineNo>

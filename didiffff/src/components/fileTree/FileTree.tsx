@@ -1,13 +1,12 @@
 import React from 'react';
 import { TreeView, TreeItem } from '@material-ui/lab';
 
-import { ProjectDiffItem } from 'kurakuraberuberu';
-
+import { ProjectDiffItemModel } from 'ddapi/api';
 import { ProjectDiffDirectoryItem } from 'ddapi/directory';
 import FileTreeItem from './FileTreeItem';
 
 interface ProjectTreeItemProps {
-  content: ProjectDiffItem;
+  content: ProjectDiffItemModel;
   nodeId: string;
   path: string[];
 }

@@ -22,7 +22,7 @@ const PrintJson = (props: PrintJsonProps) => {
     if (!targFile) {
       return <NazonoPanel text={'not found'} />;
     } else {
-      const lines = targFile.lines;
+      const lines = targFile.content;
       const codeLines = (
         <pre>
           <code>

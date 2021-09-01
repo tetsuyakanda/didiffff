@@ -1,4 +1,4 @@
-import { ProjectDiffDirectory, ProjectDiffFile } from 'kurakuraberuberu';
+import { ProjectDiffDirectory } from 'kurakuraberuberu';
 import { ProjectDiffFileItem } from './file';
 
 /**

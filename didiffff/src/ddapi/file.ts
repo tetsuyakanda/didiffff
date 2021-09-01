@@ -1,38 +1,39 @@
 import { ProjectDiffFile, LineWithValues, TokenWithValues } from 'kurakuraberuberu';
-import { DiffStatusLine } from './diffStatus';
+import { DiffStatusLine, DiffStatusText } from './diffStatus';
 import { TokenWithTrace } from './token';
 
 export class ProjectDiffFileItem implements ProjectDiffFile {
   _file: ProjectDiffFile;
+  content: LineWithValuesModel[];
 
   constructor(file: ProjectDiffFile) {
     this._file = file;
+    this.content = file.content.map((l) => new LineWithValuesModel(l));
   }
 
   get type() {
     return this._file.type;
   }
 
-  get content() {
-    return this._file.content;
-  }
-
   get name() {
     return this._file.name;
   }
 
-  get lines() {
-    return this._file.content.map((l) => new LineWithValuesModel(l));
+  diffStatusTrace() {
+    return this.content
+      .flatMap((l) => l.tokens)
+      .map((t) => t?.diffStatus())
+      .some((ts) => ts === 'diffInLength' || ts === 'diffInContents');
   }
 
-  diffStatusTrace() {}
-
-  diffStatusText() {}
+  diffStatusText(): DiffStatusText {
+    return this.content.some((l) => l.diffStatusLine() !== 'both');
+  }
 }
 
 export class LineWithValuesModel implements LineWithValues {
   _line: LineWithValues;
-  tokens: TokenWithValues[] | undefined;
+  tokens: TokenWithTrace[] | undefined;
 
   constructor(line: LineWithValues) {
     this._line = line;
@@ -51,7 +52,7 @@ export class LineWithValuesModel implements LineWithValues {
     return this._line.lineno2;
   }
 
-  get diffStatusLine(): DiffStatusLine {
+  diffStatusLine(): DiffStatusLine {
     return !this.lineno1 ? 'l2only' : !this.lineno2 ? 'l1only' : 'both';
   }
 }

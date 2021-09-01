@@ -5,7 +5,7 @@ import { styled } from '@material-ui/core/styles';
 import usePromise from 'react-promise-suspense';
 
 import AppHeader from 'components/organisms/AppHeader';
-import FileTree from 'components/organisms/FileTree';
+import FileTree from 'components/fileTree/FileTree';
 import NazonoView from 'components/organisms/NazonoView';
 import { fetchTargetInfo, ProjectDiffDirectoryItem } from 'ddapi/directory';
 import PrintJson from 'components/organisms/ProntJson';
