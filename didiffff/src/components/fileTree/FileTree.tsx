@@ -11,6 +11,7 @@ interface ProjectTreeItemProps {
   path: string[];
 }
 
+// actually, this Item represents a directory
 const ProjectTreeItem = (props: ProjectTreeItemProps) => {
   const { content, nodeId, path } = props;
 
@@ -33,6 +34,9 @@ interface FileTreeProps {
   root: ProjectDiffDirectoryItem;
 }
 
+/*
+ * Tree View
+ */
 const FileTree = (props: FileTreeProps) => {
   const root = props.root;
   return (

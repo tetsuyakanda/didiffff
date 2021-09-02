@@ -8,6 +8,7 @@ interface DiffMarkProps {
   diffInTrace: DiffStatusTrace;
 }
 
+// put some notification icon before filename; existence of diff ( text | trace )
 const DiffMark = (props: DiffMarkProps) => {
   const { diffInText, diffInTrace } = props;
   return (

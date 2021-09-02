@@ -12,6 +12,7 @@ interface FileTreeProps {
   path: string[];
 }
 
+// this Item represents a file
 const FileTreeItem = ({ content, nodeId, path }: FileTreeProps) => {
   const { selectFile } = useContext(SelectedFile);
   const onClick = () => selectFile(path);
