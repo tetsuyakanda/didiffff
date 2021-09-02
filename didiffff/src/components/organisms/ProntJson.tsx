@@ -3,7 +3,7 @@ import React, { useContext } from 'react';
 import { SelectedFile } from 'App';
 import NazonoPanel from 'components/atoms/NazonoPanel';
 import { ProjectDiffDirectoryItem } from 'ddapi/directory';
-import CodeLine from 'components/atoms/CodeLine';
+import CodeLine from 'components/code/CodeLine';
 
 interface PrintJsonProps {
   root: ProjectDiffDirectoryItem;

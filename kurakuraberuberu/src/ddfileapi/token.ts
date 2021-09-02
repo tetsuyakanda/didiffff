@@ -18,9 +18,3 @@ export function createTokenWithValues(
   const { image, startColumn, endColumn } = token;
   return { image, startColumn, endColumn, value1, value2 };
 }
-
-// export function spaceToken(length: number) {
-//   return {
-//     image: ' '.repeat(length),
-//   };
-// }
