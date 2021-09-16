@@ -40,9 +40,6 @@ const MainView = () => {
         <Toolbar />
         <Container maxWidth="sm">
           <NazonoView />
-          <MyPaper>
-            <p>Source Code</p>
-          </MyPaper>
           <PrintJson root={root} />
         </Container>
       </main>

@@ -23,10 +23,12 @@ type LineType = {
   lineType: DiffStatusLine;
 };
 
-const DL = styled(({ lineType, ...other }: LineType) => <span {...other} />)({
+const DL = styled(({ lineType, ...other }: LineType) => <div {...other} />)({
   background: ({ lineType }: LineType) =>
     lineType === 'l1only' ? '#FFD6D6' : lineType === 'l2only' ? '#D6FFD6' : 'white',
   padding: '2px',
+  //display: 'inline-block',
+  width: '100%',
 });
 
 interface TokensProps {
@@ -39,14 +41,15 @@ const Tokens = (props: TokensProps) => {
   const { tokens, lineType } = props;
   const result: JSX.Element[] = [];
   let preEndColumn = 0;
+  let c = 0;
   for (const token of tokens) {
     const startColumn = token.startColumn!;
     const endColumn = token.endColumn!;
     const delta = startColumn - preEndColumn - 1;
     if (delta > 0) {
-      result.push(<SpaceToken length={delta} />);
+      result.push(<SpaceToken length={delta} key={c++} />);
     }
-    result.push(<Token token={token} lineType={lineType} />);
+    result.push(<Token token={token} lineType={lineType} key={c++} />);
     preEndColumn = endColumn;
   }
   return <span>{result}</span>;
@@ -56,13 +59,11 @@ const CodeLine = ({ line }: Props) => {
   const diffStatusLine = line.diffStatusLine();
   const { lineno1, lineno2, tokens } = line;
   return (
-    <div>
+    <DL lineType={diffStatusLine}>
       <LineNo>{lineno1}</LineNo>
       <LineNo>{lineno2}</LineNo>
-      <DL lineType={diffStatusLine}>
-        {tokens && <Tokens tokens={tokens} lineType={diffStatusLine} />}
-      </DL>
-    </div>
+      {tokens ? <Tokens tokens={tokens} lineType={diffStatusLine} /> : ' '}
+    </DL>
   );
 };
 

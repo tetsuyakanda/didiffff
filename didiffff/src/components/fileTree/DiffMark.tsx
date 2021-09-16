@@ -12,10 +12,10 @@ interface DiffMarkProps {
 const DiffMark = (props: DiffMarkProps) => {
   const { diffInText, diffInTrace } = props;
   return (
-    <span>
+    <>
       <Circle color={diffTextColor(diffInText)} />
       <Circle color={diffTraceColor(diffInTrace)} />
-    </span>
+    </>
   );
 };
 

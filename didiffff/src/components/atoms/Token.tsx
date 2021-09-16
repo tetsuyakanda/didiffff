@@ -34,7 +34,7 @@ const Token = (props: TokenProps) => {
   if (status === 'noTrace') {
     return <span>{token.image}</span>;
   } else {
-    // if this line is in DIFF, we cannot compare trace so indicate as "no diff in trace"
+    // we cannot compare traces if this line is in DIFF part so indicate as "no diff in trace"
     const newStatus = lineType === 'both' ? status : 'noDiff';
     return <TokenWithValue tokenType={newStatus}>{token.image}</TokenWithValue>;
   }

@@ -27,7 +27,7 @@ const PrintJson = (props: PrintJsonProps) => {
         <pre>
           <code>
             {lines.map((l) => (
-              <CodeLine line={l} key={l.lineno1} />
+              <CodeLine line={l} key={l.lineno1 + '-' + l.lineno2} />
             ))}
           </code>
         </pre>
