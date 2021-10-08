@@ -16,7 +16,7 @@ const MyPaper = styled(Paper)({
 });
 
 const MyDrawer = styled(Drawer)({
-  width: '200px',
+  width: '700px',
   flexShrink: 0,
 });
 
@@ -43,6 +43,10 @@ const MainView = () => {
           <PrintJson root={root} />
         </Container>
       </main>
+      <div>
+        <Toolbar />
+        <div>YA</div>
+      </div>
     </Root>
   );
 };

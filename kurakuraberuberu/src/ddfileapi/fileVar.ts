@@ -87,11 +87,40 @@ export interface ProjectDiffFile extends ProjectItemBase {
  * This function returns the source code tokens grouped by line.
  */
 function groupTokensByLine(tokens: SourceCodeToken[]) {
-  return tokens.reduce((obj, value) => {
+  return tokens.flatMap(splitTokenWithMultipleLines).reduce((obj, value) => {
     const key = value.startLine!;
     (obj[key] || (obj[key] = [])).push(value);
     return obj;
   }, {} as Partial<Record<number, SourceCodeToken[]>>);
+}
+
+/**
+ * 複数行トークン対策。というかコメント。最初の行はインデントがstartColumnに入っていて
+ * imageは空白がない状態だが、2行目以降は改行で区切るのでimageのほうにインデントは入っているのでstartColumnを1にする。
+ * @param token
+ * @returns
+ */
+function splitTokenWithMultipleLines(token: SourceCodeToken) {
+  let t = { ...token };
+  let result: SourceCodeToken[] = [];
+  if (t.image.match(/\n/g) === null) {
+    result.push(t);
+  } else {
+    let index = 0;
+    let tmpt;
+    while (t.image.match(/\n/g) != null) {
+      tmpt = { ...t };
+      tmpt.image = t.image.slice(0, t.image.indexOf('\n'));
+      tmpt.startColumn = index > 0 ? 1 : t.startColumn;
+      tmpt.startLine = token.startLine! + index++;
+      result.push(tmpt);
+      t.image = t.image.slice(t.image.indexOf('\n') + 1);
+    }
+    t.startLine = token.startLine! + index;
+    t.startColumn = 1;
+    result.push(t);
+  }
+  return result;
 }
 
 function createFilePath(dirs: string[], file: string): string {
