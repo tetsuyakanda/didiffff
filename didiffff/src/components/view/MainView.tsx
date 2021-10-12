@@ -9,6 +9,7 @@ import FileTree from 'components/fileTree/FileTree';
 import NazonoView from 'components/organisms/NazonoView';
 import { fetchTargetInfo, ProjectDiffDirectoryItem } from 'ddapi/directory';
 import PrintJson from 'components/organisms/ProntJson';
+import ValueList from 'components/value/ValueList';
 
 const MyPaper = styled(Paper)({
   padding: '20px',
@@ -16,12 +17,18 @@ const MyPaper = styled(Paper)({
 });
 
 const MyDrawer = styled(Drawer)({
-  width: '700px',
+  width: '500px',
   flexShrink: 0,
 });
 
 const Root = styled('div')({
   display: 'flex',
+  height: '100%',
+});
+
+const SView = styled('div')({
+  position: 'sticky',
+  top: 0,
 });
 
 const MainView = () => {
@@ -43,10 +50,10 @@ const MainView = () => {
           <PrintJson root={root} />
         </Container>
       </main>
-      <div>
+      <Drawer variant="permanent" anchor="right">
         <Toolbar />
-        <div>YA</div>
-      </div>
+        <ValueList />
+      </Drawer>
     </Root>
   );
 };

@@ -1,14 +1,18 @@
-import React from 'react';
+import React, { useContext } from 'react';
 
 import { TokenWithTrace } from 'ddapi/token';
 import { DiffStatusLine, DiffStatusToken } from 'ddapi/diffStatus';
 import { styled } from '@material-ui/core';
+import { SelectedToken } from 'App';
 
 type TokenType = {
   tokenType: DiffStatusToken;
+  onClick: () => void;
 };
 
-const TokenWithValue = styled(({ tokenType, ...other }: TokenType) => <span {...other} />)({
+const TokenWithValue = styled(({ tokenType, onClick, ...other }: TokenType) => (
+  <span onClick={onClick} {...other} />
+))({
   background: ({ tokenType }: TokenType) =>
     tokenType === 'diffInContents'
       ? '#6d6db6'
@@ -30,13 +34,19 @@ interface TokenProps {
 
 const Token = (props: TokenProps) => {
   const { token, lineType } = props;
+  const { selectToken } = useContext(SelectedToken);
   const status = token.diffStatus();
   if (status === 'noTrace') {
     return <span>{token.image}</span>;
   } else {
     // we cannot compare traces if this line is in DIFF part so indicate as "no diff in trace"
     const newStatus = lineType === 'both' ? status : 'noDiff';
-    return <TokenWithValue tokenType={newStatus}>{token.image}</TokenWithValue>;
+    const onClick = () => selectToken(token);
+    return (
+      <TokenWithValue tokenType={newStatus} onClick={onClick}>
+        {token.image}
+      </TokenWithValue>
+    );
   }
 };
 
