@@ -36,7 +36,14 @@ const diffTextColor = (diffInText: DiffStatusText) => {
 };
 
 const diffTraceColor = (diffInTrace: DiffStatusTrace) => {
-  return diffInTrace ? '#c96dc9' : '#ffffff';
+  switch (diffInTrace) {
+    case 'diff':
+      return '#c96dc9';
+    case 'noDiff':
+      return '#f3c9f3';
+    case 'noTrace':
+      return '#ffffff';
+  }
 };
 
 export default DiffMark;
