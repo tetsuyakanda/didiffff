@@ -1,6 +1,11 @@
 // Trace
 
-export type DiffStatusToken = DiffStatusTokenInLength | 'diffInContents' | 'noDiff' | 'noTrace';
+export type DiffStatusToken =
+  | DiffStatusTokenInLength
+  | 'diffInContents'
+  | 'sameLengthObject'
+  | 'noDiff'
+  | 'noTrace';
 export type DiffStatusTokenInLength = 't1only' | 't2only' | 'diffInLength';
 export type DiffStatusTrace = 'diff' | 'noDiff' | 'noTrace';
 

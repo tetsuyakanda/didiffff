@@ -34,6 +34,8 @@ function diffStatusToken(
   if (!value1 && !value2) return 'noTrace';
   if (!value1 || !value2 || value1.length !== value2.length) {
     return 'diffInLength';
+  } else if (value1.some(mightBeObject) || value2.some(mightBeObject)) {
+    return 'sameLengthObject';
   } else {
     return diffValues(value1, value2) ? 'diffInContents' : 'noDiff';
   }
@@ -43,13 +45,34 @@ function valueList(value: ValueListItemData[]) {
   return value.map((v) => v.value);
 }
 
+/**
+ * it might be object (... but not String)
+ * @param value
+ * @returns
+ */
+function mightBeObject(value: ValueListItemData) {
+  return value.value.indexOf('@') >= 0 && value.value.indexOf('"') === -1;
+}
+
 function diffValues(value1: ValueListItemData[], value2: ValueListItemData[]): boolean {
-  const vv1 = valueList(value1);
-  const vv2 = valueList(value2);
+  const vv1 = flatten(valueList(value1));
+  const vv2 = flatten(valueList(value2));
   for (let i = 0; i < vv1.length; i++) {
     if (vv1[i] !== vv2[i]) {
       return true;
     }
   }
   return false;
+}
+
+function flatten(valueList: string[]) {
+  const isString = (v: string) => v.startsWith('java.lang.String@');
+  const result = valueList.map((v) => {
+    if (isString(v)) {
+      return v.substring(v.indexOf('"'), v.length);
+    } else {
+      return v;
+    }
+  });
+  return result;
 }

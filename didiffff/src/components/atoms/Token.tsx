@@ -13,12 +13,19 @@ type TokenType = {
 const TokenWithValue = styled(({ tokenType, onClick, ...other }: TokenType) => (
   <span onClick={onClick} {...other} />
 ))({
-  background: ({ tokenType }: TokenType) =>
-    tokenType === 'diffInContents'
-      ? '#6d6db6'
-      : tokenType === 'diffInLength'
-      ? '#6bd66b'
-      : '#939393',
+  background: ({ tokenType }: TokenType) => {
+    switch (tokenType) {
+      case 'diffInLength':
+        return '#6bd66b';
+      case 'sameLengthObject':
+        return '#c7c7e6';
+      case 'diffInContents':
+        return '#6d6db6';
+      default:
+        return '#939393';
+    }
+  },
+
   color: 'white',
   borderStyle: 'solid',
   borderRadius: 3,
