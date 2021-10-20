@@ -1,15 +1,18 @@
 import { ProjectDiffFile, LineWithValues } from 'kurakuraberuberu';
-import { DiffStatusLine, DiffStatusText, DiffStatusTrace } from './diffStatus';
+import { DiffStatus, DiffStatusLine, DiffStatusText, DiffStatusTrace } from './diffStatus';
 import { TokenWithTrace } from './token';
 
-export class ProjectDiffFileItem implements ProjectDiffFile {
+export class ProjectDiffFileItem implements ProjectDiffFile, DiffStatus {
   _file: ProjectDiffFile;
   content: LineWithValuesModel[];
+  diffStatusTrace: DiffStatusTrace;
+  diffStatusText: DiffStatusText;
 
   constructor(file: ProjectDiffFile) {
     this._file = file;
     this.content = file.content.map((l) => new LineWithValuesModel(l));
-    console.log('new file');
+    this.diffStatusTrace = this.diffStatusTraceCalc();
+    this.diffStatusText = this.diffStatusTextCalc();
   }
 
   get type() {
@@ -20,7 +23,7 @@ export class ProjectDiffFileItem implements ProjectDiffFile {
     return this._file.name;
   }
 
-  diffStatusTrace(): DiffStatusTrace {
+  diffStatusTraceCalc(): DiffStatusTrace {
     const ds = this.content.flatMap((l) => l.tokens).map((t) => t?.diffStatus());
     if (ds.some((ts) => ts === 'diffInLength' || ts === 'diffInContents')) {
       return 'diff';
@@ -31,7 +34,7 @@ export class ProjectDiffFileItem implements ProjectDiffFile {
     }
   }
 
-  diffStatusText(): DiffStatusText {
+  diffStatusTextCalc(): DiffStatusText {
     return this.content.some((l) => l.diffStatusLine() !== 'both');
   }
 }

@@ -4,6 +4,7 @@ import { TreeView, TreeItem } from '@material-ui/lab';
 import { ProjectDiffItemModel } from 'ddapi/api';
 import { ProjectDiffDirectoryItem } from 'ddapi/directory';
 import FileTreeItem from './FileTreeItem';
+import DiffMark from './DiffMark';
 
 interface ProjectTreeItemProps {
   content: ProjectDiffItemModel;
@@ -22,8 +23,15 @@ const ProjectTreeItem = (props: ProjectTreeItemProps) => {
       return <ProjectTreeItem content={c} nodeId={id} key={id} path={nPath} />;
     });
 
+    const label = (
+      <>
+        <DiffMark diffInText={content.diffStatusText} diffInTrace={content.diffStatusTrace} />
+        <span>{content.name}</span>
+      </>
+    );
+
     return (
-      <TreeItem nodeId={nodeId} label={content.name}>
+      <TreeItem nodeId={nodeId} label={label}>
         {children}
       </TreeItem>
     );
@@ -46,4 +54,4 @@ const FileTree = (props: FileTreeProps) => {
   );
 };
 
-export default FileTree;
+export default React.memo(FileTree);

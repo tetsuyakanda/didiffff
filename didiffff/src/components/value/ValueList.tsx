@@ -44,6 +44,8 @@ const ValueList = () => {
   if (selectedToken) {
     const result = (
       <>
+        <div>Token: {selectedToken.image} </div>
+        {/* <div>Status: {selectedToken.diffStatus()}</div> */}
         <ValueList1 selectedToken={selectedToken} />
         <ValueList2 selectedToken={selectedToken} />
       </>

@@ -17,7 +17,7 @@ const MyPaper = styled(Paper)({
 });
 
 const MyDrawer = styled(Drawer)({
-  width: '500px',
+  width: '600px',
   flexShrink: 0,
 });
 
@@ -45,7 +45,7 @@ const MainView = () => {
       </MyDrawer>
       <main>
         <Toolbar />
-        <Container maxWidth="sm">
+        <Container maxWidth="xl">
           <NazonoView />
           <PrintJson root={root} />
         </Container>

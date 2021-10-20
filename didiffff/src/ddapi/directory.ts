@@ -1,4 +1,6 @@
 import { ProjectDiffDirectory } from 'kurakuraberuberu';
+import { ProjectDiffItemModel } from './api';
+import { DiffStatus, DiffStatusText, DiffStatusTrace } from './diffStatus';
 import { ProjectDiffFileItem } from './file';
 
 /**
@@ -31,7 +33,19 @@ export async function fetchTargetInfo(projectName: string): Promise<ProjectDiffD
   return new ProjectDiffDirectoryItem(json);
 }
 
-export class ProjectDiffDirectoryItem implements ProjectDiffDirectory {
+export class ProjectDiffDirectoryItem implements ProjectDiffDirectory, DiffStatus {
+  private _dir: ProjectDiffDirectory;
+  children: ProjectDiffItemModel[];
+  diffStatusText: DiffStatusText;
+  diffStatusTrace: DiffStatusTrace;
+
+  constructor(dir: ProjectDiffDirectory) {
+    this._dir = dir;
+    this.children = this.childrenCalc();
+    this.diffStatusText = this.diffStatusTextCalc();
+    this.diffStatusTrace = this.diffStatusTraceCalc();
+  }
+
   get type() {
     return this._dir.type;
   }
@@ -40,10 +54,26 @@ export class ProjectDiffDirectoryItem implements ProjectDiffDirectory {
     return this._dir.name;
   }
 
-  get children() {
+  childrenCalc() {
     return this._dir.children.map((i) =>
       i.type === 'file' ? new ProjectDiffFileItem(i) : new ProjectDiffDirectoryItem(i)
     );
+  }
+
+  diffStatusTextCalc(): DiffStatusText {
+    return this.children.some((i) => i.diffStatusText);
+  }
+
+  diffStatusTraceCalc(): DiffStatusTrace {
+    //return 'noTrace';
+    const diffTr = this.children.map((i) => i.diffStatusTrace);
+    if (diffTr.some((t) => t === 'diff')) {
+      return 'diff';
+    } else if (diffTr.some((t) => t === 'noDiff')) {
+      return 'noDiff';
+    } else {
+      return 'noTrace';
+    }
   }
 
   findFile(path: string[]): ProjectDiffFileItem | undefined {
@@ -61,10 +91,5 @@ export class ProjectDiffDirectoryItem implements ProjectDiffDirectory {
       );
       return targDir?.findFile2(path.slice(1));
     }
-  }
-
-  private _dir: ProjectDiffDirectory;
-  constructor(dir: ProjectDiffDirectory) {
-    this._dir = dir;
   }
 }

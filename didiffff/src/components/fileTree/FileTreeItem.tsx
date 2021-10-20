@@ -18,7 +18,7 @@ const FileTreeItem = ({ content, nodeId, path }: FileTreeProps) => {
   const onClick = () => selectFile(path);
   const label = (
     <>
-      <DiffMark diffInText={content.diffStatusText()} diffInTrace={content.diffStatusTrace()} />
+      <DiffMark diffInText={content.diffStatusText} diffInTrace={content.diffStatusTrace} />
       <span>{content.name}</span>
     </>
   );

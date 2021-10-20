@@ -25,8 +25,8 @@ type CircleColor = {
 
 const Circle = styled(({ color, ...other }: CircleColor) => <span {...other} />)({
   display: 'inline-block',
-  width: '10px',
-  height: '10px',
+  width: '8px',
+  height: '8px',
   borderRadius: '50%',
   backgroundColor: ({ color }: CircleColor) => color,
 });

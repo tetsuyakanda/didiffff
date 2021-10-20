@@ -1,9 +1,14 @@
 import React, { useContext } from 'react';
+import { styled } from '@material-ui/core/styles';
 
 import { SelectedFile } from 'App';
 import NazonoPanel from 'components/atoms/NazonoPanel';
 import { ProjectDiffDirectoryItem } from 'ddapi/directory';
 import CodeLine from 'components/code/CodeLine';
+
+const Code = styled('code')({
+  fontFamily: "'Fira Mono', monospace",
+});
 
 interface PrintJsonProps {
   root: ProjectDiffDirectoryItem;
@@ -25,11 +30,11 @@ const PrintJson = (props: PrintJsonProps) => {
       const lines = targFile.content;
       const codeLines = (
         <pre>
-          <code>
+          <Code>
             {lines.map((l) => (
               <CodeLine line={l} key={l.lineno1 + '-' + l.lineno2} />
             ))}
-          </code>
+          </Code>
         </pre>
       );
       return <NazonoPanel text={codeLines} />;
