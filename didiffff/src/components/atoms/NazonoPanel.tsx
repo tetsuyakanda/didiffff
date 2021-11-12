@@ -4,8 +4,8 @@ import { Paper } from '@material-ui/core';
 import { styled } from '@material-ui/core/styles';
 
 const MyPaper = styled(Paper)({
-  padding: '20px',
-  margin: '20px',
+  padding: '10px',
+  margin: '10px',
 });
 
 interface Props {

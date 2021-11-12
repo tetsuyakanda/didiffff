@@ -1,19 +1,26 @@
 import React, { useContext } from 'react';
 
+import { styled } from '@material-ui/core';
+
 import NazonoPanel from 'components/atoms/NazonoPanel';
 import { SelectedToken } from 'App';
 import { TokenWithTrace } from 'ddapi/token';
+import Value from './Value';
 
 type Props = {
   selectedToken: TokenWithTrace;
 };
+
+const Values = styled('div')({
+  display: 'flex',
+});
 
 const ValueList1 = ({ selectedToken }: Props) => {
   if (selectedToken.value1) {
     const values = (
       <>
         {selectedToken.value1.map((v) => (
-          <div key={v.id}>{v.value}</div>
+          <Value key={v.id} value={v.value} />
         ))}
       </>
     );
@@ -28,7 +35,7 @@ const ValueList2 = ({ selectedToken }: Props) => {
     const values = (
       <>
         {selectedToken.value2.map((v) => (
-          <div key={v.id}>{v.value}</div>
+          <Value key={v.id} value={v.value} />
         ))}
       </>
     );
@@ -45,9 +52,11 @@ const ValueList = () => {
     const result = (
       <>
         <div>Token: {selectedToken.image} </div>
-        {/* <div>Status: {selectedToken.diffStatus()}</div> */}
-        <ValueList1 selectedToken={selectedToken} />
-        <ValueList2 selectedToken={selectedToken} />
+        <div>Status: {selectedToken.diffStatus()}</div>
+        <Values>
+          <ValueList1 selectedToken={selectedToken} />
+          <ValueList2 selectedToken={selectedToken} />
+        </Values>
       </>
     );
     return <NazonoPanel text={result}></NazonoPanel>;

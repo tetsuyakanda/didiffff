@@ -6,6 +6,8 @@ import { styled } from '@material-ui/core/styles';
 import theme from 'theme';
 import MainView from 'components/view/MainView';
 import { TokenWithTrace } from 'ddapi/token';
+import { DiffStatusToken } from 'ddapi/diffStatus';
+import { TokenWithValues } from 'kurakuraberuberu';
 
 type SelectedFileContext = {
   selectedFile: string[];
@@ -24,10 +26,22 @@ const Root = styled('div')({
   display: 'flex',
 });
 
+const nullToken: TokenWithTrace = {
+  _token: {} as TokenWithValues,
+  image: '',
+  startColumn: undefined,
+  endColumn: undefined,
+  value1: undefined,
+  value2: undefined,
+  diffStatus: function (): DiffStatusToken {
+    return 'noDiff';
+  },
+};
+
 function App() {
   const [selectedFile, selectFile] = useState(['']);
   const valueF = { selectedFile, selectFile };
-  const [selectedToken, selectToken] = useState({} as TokenWithTrace);
+  const [selectedToken, selectToken] = useState(nullToken);
   const valueT = { selectedToken, selectToken };
 
   return (
