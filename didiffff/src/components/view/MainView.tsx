@@ -35,8 +35,8 @@ const MainView = () => {
   const root: ProjectDiffDirectoryItem = usePromise(fetchTargetInfo, []);
   return (
     <Root>
-      <AppHeader />
       <MyDrawer variant="permanent">
+        <AppHeader />
         <Toolbar />
         <div>
           <MyPaper>File Tree</MyPaper>
@@ -44,14 +44,12 @@ const MainView = () => {
         <FileTree root={root} />
       </MyDrawer>
       <main>
-        <Toolbar />
         <Container maxWidth="xl">
           <NazonoView />
           <PrintJson root={root} />
         </Container>
       </main>
       <Drawer variant="permanent" anchor="right">
-        <Toolbar />
         <ValueList />
       </Drawer>
     </Root>
