@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 
-import { TreeItem } from '@material-ui/lab';
+import { TreeItem } from '@mui/lab';
 
 import { SelectedFile } from 'App';
 import { ProjectDiffFileItem } from 'ddapi/file';

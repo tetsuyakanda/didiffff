@@ -1,6 +1,7 @@
 import React from 'react';
 
-import { styled } from '@material-ui/core';
+import styled from '@emotion/styled';
+
 import { LineWithValuesModel } from 'ddapi/file';
 import { DiffStatusLine } from 'ddapi/diffStatus';
 import { TokenWithTrace } from 'ddapi/token';
@@ -10,7 +11,7 @@ interface Props {
   line: LineWithValuesModel;
 }
 
-const LineNo = styled('span')({
+const LineNo = styled.span({
   display: 'inline-block',
   color: 'gray',
   textAlign: 'right',
@@ -23,13 +24,16 @@ type LineType = {
   lineType: DiffStatusLine;
 };
 
-const DL = styled(({ lineType, ...other }: LineType) => <div {...other} />)({
-  background: ({ lineType }: LineType) =>
-    lineType === 'l1only' ? '#FFD6D6' : lineType === 'l2only' ? '#D6FFD6' : 'white',
-  padding: '2px',
-  //display: 'inline-block',
-  width: '100%',
-});
+const DL = styled.div<LineType>(
+  {
+    padding: '2px',
+    width: '100%',
+  },
+  (props) => ({
+    background:
+      props.lineType === 'l1only' ? '#FFD6D6' : props.lineType === 'l2only' ? '#D6FFD6' : 'white',
+  })
+);
 
 interface TokensProps {
   tokens: TokenWithTrace[];

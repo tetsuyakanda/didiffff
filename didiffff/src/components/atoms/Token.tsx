@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 
 import { TokenWithTrace } from 'ddapi/token';
 import { DiffStatusLine, DiffStatusToken } from 'ddapi/diffStatus';
-import { styled } from '@material-ui/core';
+import styled from '@emotion/styled';
 import { SelectedToken } from 'App';
 
 type TokenType = {
@@ -10,29 +10,32 @@ type TokenType = {
   onClick: () => void;
 };
 
-const TokenWithValue = styled(({ tokenType, onClick, ...other }: TokenType) => (
-  <span onClick={onClick} {...other} />
-))({
-  background: ({ tokenType }: TokenType) => {
-    switch (tokenType) {
-      case 'diffInLength':
-        return '#6bd66b';
-      case 'sameLengthObject':
-        return '#c7c7e6';
-      case 'diffInContents':
-        return '#6d6db6';
-      default:
-        return '#939393';
-    }
+const TokenWithValue = styled.span<TokenType>(
+  {
+    color: 'white',
+    borderStyle: 'solid',
+    borderRadius: 3,
+    border: '1px',
+    borderColor: '#cadcfc',
+    padding: '2px 2px',
   },
+  (props) => ({
+    background: myColor(props.tokenType),
+  })
+);
 
-  color: 'white',
-  borderStyle: 'solid',
-  borderRadius: 3,
-  border: '1px',
-  borderColor: '#cadcfc',
-  padding: '2px 2px',
-});
+const myColor = (tokenType: DiffStatusToken) => {
+  switch (tokenType) {
+    case 'diffInLength':
+      return '#6bd66b';
+    case 'sameLengthObject':
+      return '#c7c7e6';
+    case 'diffInContents':
+      return '#6d6db6';
+    default:
+      return '#939393';
+  }
+};
 
 interface TokenProps {
   token: TokenWithTrace;

@@ -1,17 +1,13 @@
 import React from 'react';
 
-import { Paper } from '@material-ui/core';
-import { styled } from '@material-ui/core/styles';
-
-const MyPaper = styled(Paper)({
-  padding: '10px',
-  margin: '10px',
-});
+import { Paper } from '@mui/material';
 
 interface Props {
   text: string | JSX.Element;
 }
 
-const NazonoPanel = ({ text }: Props) => <MyPaper>{text}</MyPaper>;
+const NazonoPanel = ({ text }: Props) => (
+  <Paper sx={{ padding: '10px', margin: '10px' }}>{text}</Paper>
+);
 
 export default NazonoPanel;

@@ -1,7 +1,7 @@
 import React from 'react';
 
-import { Toolbar, Paper, Drawer, Container } from '@material-ui/core';
-import { styled } from '@material-ui/core/styles';
+import { Drawer, Container } from '@mui/material';
+import styled from '@emotion/styled';
 import usePromise from 'react-promise-suspense';
 
 import AppHeader from 'components/organisms/AppHeader';
@@ -10,25 +10,16 @@ import NazonoView from 'components/organisms/NazonoView';
 import { fetchTargetInfo, ProjectDiffDirectoryItem } from 'ddapi/directory';
 import PrintJson from 'components/organisms/ProntJson';
 import ValueList from 'components/value/ValueList';
-
-const MyPaper = styled(Paper)({
-  padding: '20px',
-  margin: '20px',
-});
+import NazonoPanel from 'components/atoms/NazonoPanel';
 
 const MyDrawer = styled(Drawer)({
   width: '600px',
   flexShrink: 0,
 });
 
-const Root = styled('div')({
+const Root = styled.div({
   display: 'flex',
   height: '100%',
-});
-
-const SView = styled('div')({
-  position: 'sticky',
-  top: 0,
 });
 
 const MainView = () => {
@@ -37,9 +28,8 @@ const MainView = () => {
     <Root>
       <MyDrawer variant="permanent">
         <AppHeader />
-        <Toolbar />
         <div>
-          <MyPaper>File Tree</MyPaper>
+          <NazonoPanel text="File Tree" />
         </div>
         <FileTree root={root} />
       </MyDrawer>

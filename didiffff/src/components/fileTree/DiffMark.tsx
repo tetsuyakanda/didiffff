@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { DiffStatusText, DiffStatusTrace } from 'ddapi/diffStatus';
-import { styled } from '@material-ui/core';
+import styled from '@emotion/styled';
 
 interface DiffMarkProps {
   diffInText: DiffStatusText;
@@ -23,14 +23,18 @@ type CircleColor = {
   color: string;
 };
 
-const Circle = styled(({ color, ...other }: CircleColor) => <span {...other} />)({
-  display: 'inline-block',
-  width: '6px',
-  height: '6px',
-  margin: '1px',
-  borderRadius: '50%',
-  backgroundColor: ({ color }: CircleColor) => color,
-});
+const Circle = styled.span<CircleColor>(
+  {
+    display: 'inline-block',
+    width: '6px',
+    height: '6px',
+    margin: '1px',
+    borderRadius: '50%',
+  },
+  (props) => ({
+    backgroundColor: props.color,
+  })
+);
 
 const diffTextColor = (diffInText: DiffStatusText) => {
   return diffInText ? '#6dc96d' : '#ffffff';

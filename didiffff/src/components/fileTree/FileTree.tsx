@@ -1,5 +1,5 @@
 import React from 'react';
-import { TreeView, TreeItem } from '@material-ui/lab';
+import { TreeView, TreeItem } from '@mui/lab';
 
 import { ProjectDiffItemModel } from 'ddapi/api';
 import { ProjectDiffDirectoryItem } from 'ddapi/directory';

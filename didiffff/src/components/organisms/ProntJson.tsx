@@ -1,12 +1,12 @@
 import React, { useContext } from 'react';
-import { styled } from '@material-ui/core/styles';
+import styled from '@emotion/styled';
 
 import { SelectedFile } from 'App';
 import NazonoPanel from 'components/atoms/NazonoPanel';
 import { ProjectDiffDirectoryItem } from 'ddapi/directory';
 import CodeLine from 'components/code/CodeLine';
 
-const Code = styled('code')({
+const Code = styled.code({
   fontFamily: "'Fira Mono', monospace",
 });
 

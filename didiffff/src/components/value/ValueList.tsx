@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 
-import { styled } from '@material-ui/core';
+import styled from '@emotion/styled';
 
 import NazonoPanel from 'components/atoms/NazonoPanel';
 import { SelectedToken } from 'App';
@@ -11,7 +11,7 @@ type Props = {
   selectedToken: TokenWithTrace;
 };
 
-const Values = styled('div')({
+const Values = styled.div({
   display: 'flex',
 });
 
