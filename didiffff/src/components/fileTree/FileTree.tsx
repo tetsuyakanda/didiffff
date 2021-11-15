@@ -6,6 +6,7 @@ import { ProjectDiffDirectoryItem } from 'ddapi/directory';
 
 import FileTreeItem from './FileTreeItem';
 import DiffMark from './DiffMark';
+import MyPanel from 'components/atoms/MyPanel';
 
 interface ProjectTreeItemProps {
   content: ProjectDiffItemModel;
@@ -49,9 +50,11 @@ interface FileTreeProps {
 const FileTree = (props: FileTreeProps) => {
   const root = props.root;
   return (
-    <TreeView defaultCollapseIcon="⊟" defaultExpandIcon="⊞">
-      <ProjectTreeItem content={root} nodeId="0" path={[root.name]} />
-    </TreeView>
+    <MyPanel>
+      <TreeView defaultCollapseIcon="⊟" defaultExpandIcon="⊞">
+        <ProjectTreeItem content={root} nodeId="0" path={[root.name]} />
+      </TreeView>
+    </MyPanel>
   );
 };
 

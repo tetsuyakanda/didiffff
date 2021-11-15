@@ -9,7 +9,7 @@ import MyPanel from 'components/atoms/MyPanel';
 import CodeLine from 'components/code/CodeLine';
 
 const Code = styled.code({
-  fontFamily: "'Fira Mono', monospace",
+  fontFamily: "'DejaVu Mono', monospace",
 });
 
 interface PrintJsonProps {

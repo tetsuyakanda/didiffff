@@ -2,6 +2,7 @@ import React, { Suspense, useState } from 'react';
 
 import { CssBaseline, ThemeProvider, Theme, StyledEngineProvider } from '@mui/material';
 import styled from '@emotion/styled';
+import '@fontsource/dejavu-mono';
 
 import theme from 'theme';
 import MainView from 'components/view/MainView';
