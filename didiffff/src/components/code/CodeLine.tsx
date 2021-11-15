@@ -5,7 +5,7 @@ import styled from '@emotion/styled';
 import { LineWithValuesModel } from 'ddapi/file';
 import { DiffStatusLine } from 'ddapi/diffStatus';
 import { TokenWithTrace } from 'ddapi/token';
-import Token, { SpaceToken } from 'components/atoms/Token';
+import ClickableToken, { SpaceToken } from 'components/code/ClickableToken';
 
 interface Props {
   line: LineWithValuesModel;
@@ -53,7 +53,7 @@ const Tokens = (props: TokensProps) => {
     if (delta > 0) {
       result.push(<SpaceToken length={delta} key={c++} />);
     }
-    result.push(<Token token={token} lineType={lineType} key={c++} />);
+    result.push(<ClickableToken token={token} lineType={lineType} key={c++} />);
     preEndColumn = endColumn;
   }
   return <span>{result}</span>;

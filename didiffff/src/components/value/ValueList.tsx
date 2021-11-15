@@ -6,6 +6,7 @@ import NazonoPanel from 'components/atoms/NazonoPanel';
 import { SelectedToken } from 'App';
 import { TokenWithTrace } from 'ddapi/token';
 import Value from './Value';
+import Status from 'components/atoms/Status';
 
 type Props = {
   selectedToken: TokenWithTrace;
@@ -52,7 +53,10 @@ const ValueList = () => {
     const result = (
       <>
         <div>Token: {selectedToken.image} </div>
-        <div>Status: {selectedToken.diffStatus()}</div>
+        <div>
+          Status:{' '}
+          <Status tokenType={selectedToken.diffStatus()}>{selectedToken.diffStatus()}</Status>
+        </div>
         <Values>
           <ValueList1 selectedToken={selectedToken} />
           <ValueList2 selectedToken={selectedToken} />
