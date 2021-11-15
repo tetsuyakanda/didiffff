@@ -1,9 +1,11 @@
 import React, { useContext } from 'react';
+
 import styled from '@emotion/styled';
 
-import { SelectedFile } from 'App';
-import NazonoPanel from 'components/atoms/NazonoPanel';
 import { ProjectDiffDirectoryItem } from 'ddapi/directory';
+
+import { SelectedFile } from 'App';
+import MyPanel from 'components/atoms/MyPanel';
 import CodeLine from 'components/code/CodeLine';
 
 const Code = styled.code({
@@ -21,11 +23,11 @@ const PrintJson = (props: PrintJsonProps) => {
   console.log(selectedFile);
 
   if (selectedFile[0] === '') {
-    return <NazonoPanel text={'not selected'} />;
+    return <MyPanel>not selected</MyPanel>;
   } else {
     const targFile = root.findFile(selectedFile);
     if (!targFile) {
-      return <NazonoPanel text={'not found'} />;
+      return <MyPanel>not found</MyPanel>;
     } else {
       const lines = targFile.content;
       const codeLines = (
@@ -37,7 +39,7 @@ const PrintJson = (props: PrintJsonProps) => {
           </Code>
         </pre>
       );
-      return <NazonoPanel text={codeLines} />;
+      return <MyPanel>{codeLines}</MyPanel>;
     }
   }
 };

@@ -32,9 +32,10 @@ function diffStatusToken(
   value2?: ValueListItemData[]
 ): DiffStatusToken {
   if (!value1 && !value2) return 'noTrace';
-  if (!value1 || !value2 || value1.length !== value2.length) {
-    return 'diffInLength';
-  } else if (value1.some(mightBeObject) || value2.some(mightBeObject)) {
+  if (!value1) return 't2only';
+  if (!value2) return 't1only';
+  if (value1.length !== value2.length) return 'diffInLength';
+  if (value1.some(mightBeObject) || value2.some(mightBeObject)) {
     return 'sameLengthObject';
   } else {
     return diffValues(value1, value2) ? 'diffInContents' : 'noDiff';

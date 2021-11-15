@@ -2,8 +2,9 @@ import React, { useContext } from 'react';
 
 import { TreeItem } from '@mui/lab';
 
-import { SelectedFile } from 'App';
 import { ProjectDiffFileItem } from 'ddapi/file';
+
+import { SelectedFile } from 'App';
 import DiffMark from './DiffMark';
 
 interface FileTreeProps {

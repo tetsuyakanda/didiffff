@@ -2,11 +2,12 @@ import React, { useContext } from 'react';
 
 import styled from '@emotion/styled';
 
-import NazonoPanel from 'components/atoms/NazonoPanel';
-import { SelectedToken } from 'App';
 import { TokenWithTrace } from 'ddapi/token';
-import Value from './Value';
+
+import { SelectedToken } from 'App';
+import MyPanel from 'components/atoms/MyPanel';
 import Status from 'components/atoms/Status';
+import Value from './Value';
 
 type Props = {
   selectedToken: TokenWithTrace;
@@ -25,9 +26,9 @@ const ValueList1 = ({ selectedToken }: Props) => {
         ))}
       </>
     );
-    return <NazonoPanel text={values}></NazonoPanel>;
+    return <MyPanel>{values}</MyPanel>;
   } else {
-    return <NazonoPanel text={'no value'}></NazonoPanel>;
+    return <MyPanel>no value</MyPanel>;
   }
 };
 
@@ -40,9 +41,9 @@ const ValueList2 = ({ selectedToken }: Props) => {
         ))}
       </>
     );
-    return <NazonoPanel text={values}></NazonoPanel>;
+    return <MyPanel>{values}</MyPanel>;
   } else {
-    return <NazonoPanel text={'no value'}></NazonoPanel>;
+    return <MyPanel>no value</MyPanel>;
   }
 };
 
@@ -50,12 +51,12 @@ const ValueList = () => {
   const { selectedToken } = useContext(SelectedToken);
 
   if (selectedToken) {
+    const newStatus = selectedToken.diffStatus();
     const result = (
       <>
         <div>Token: {selectedToken.image} </div>
         <div>
-          Status:{' '}
-          <Status tokenType={selectedToken.diffStatus()}>{selectedToken.diffStatus()}</Status>
+          Status: <Status tokenType={newStatus}>{newStatus}</Status>
         </div>
         <Values>
           <ValueList1 selectedToken={selectedToken} />
@@ -63,9 +64,9 @@ const ValueList = () => {
         </Values>
       </>
     );
-    return <NazonoPanel text={result}></NazonoPanel>;
+    return <MyPanel>{result}</MyPanel>;
   } else {
-    return <NazonoPanel text={'not selected'}></NazonoPanel>;
+    return <MyPanel>not selected</MyPanel>;
   }
 };
 

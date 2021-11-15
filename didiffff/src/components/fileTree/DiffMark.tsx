@@ -1,7 +1,8 @@
 import React from 'react';
 
-import { DiffStatusText, DiffStatusTrace } from 'ddapi/diffStatus';
 import styled from '@emotion/styled';
+
+import { DiffStatusText, DiffStatusTrace } from 'ddapi/diffStatus';
 
 interface DiffMarkProps {
   diffInText: DiffStatusText;

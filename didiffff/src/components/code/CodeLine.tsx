@@ -5,6 +5,7 @@ import styled from '@emotion/styled';
 import { LineWithValuesModel } from 'ddapi/file';
 import { DiffStatusLine } from 'ddapi/diffStatus';
 import { TokenWithTrace } from 'ddapi/token';
+
 import ClickableToken, { SpaceToken } from 'components/code/ClickableToken';
 
 interface Props {

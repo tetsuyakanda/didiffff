@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 
 import { TokenWithTrace } from 'ddapi/token';
 import { DiffStatusLine } from 'ddapi/diffStatus';
+
 import { SelectedToken } from 'App';
 import Status from 'components/atoms/Status';
 
