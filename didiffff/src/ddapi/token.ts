@@ -1,10 +1,13 @@
 import { TokenWithValues, ValueListItemData } from 'kurakuraberuberu';
-import { DiffStatusToken } from './diffStatus';
+import { DiffStatusLine, DiffStatusToken } from './diffStatus';
 
 export class TokenWithTrace implements TokenWithValues {
   _token: TokenWithValues;
-  constructor(token: TokenWithValues) {
+  diffStatus: DiffStatusToken;
+
+  constructor(token: TokenWithValues, diffStatusLine: DiffStatusLine) {
     this._token = token;
+    this.diffStatus = diffStatusToken(diffStatusLine, this._token.value1, this._token.value2);
   }
   get image() {
     return this._token.image;
@@ -21,19 +24,18 @@ export class TokenWithTrace implements TokenWithValues {
   get value2() {
     return this._token.value2;
   }
-
-  diffStatus() {
-    return diffStatusToken(this._token.value1, this._token.value2);
-  }
 }
 
 function diffStatusToken(
+  diffStatusLine: DiffStatusLine,
   value1?: ValueListItemData[],
   value2?: ValueListItemData[]
 ): DiffStatusToken {
   if (!value1 && !value2) return 'noTrace';
-  if (!value1) return 't2only';
-  if (!value2) return 't1only';
+  // we cannot compare traces if this line is in DIFF part so indicate as "no diff in trace
+  if (!value1) return diffStatusLine === 'both' ? 'diffInLength' : 't2only';
+  if (!value2) return diffStatusLine === 'both' ? 'diffInLength' : 't1only';
+  // now we have two execution traces. compare them.
   if (value1.length !== value2.length) return 'diffInLength';
   if (value1.some(mightBeObject) || value2.some(mightBeObject)) {
     return 'sameLengthObject';

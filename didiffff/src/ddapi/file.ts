@@ -24,7 +24,7 @@ export class ProjectDiffFileItem implements ProjectDiffFile, DiffStatus {
   }
 
   diffStatusTraceCalc(): DiffStatusTrace {
-    const ds = this.content.flatMap((l) => l.tokens).map((t) => t?.diffStatus());
+    const ds = this.content.flatMap((l) => l.tokens).map((t) => t?.diffStatus);
     if (ds.some((ts) => ts === 'diffInLength' || ts === 'diffInContents')) {
       return 'diff';
     } else if (ds.some((ts) => ts === 'noDiff')) {
@@ -35,17 +35,19 @@ export class ProjectDiffFileItem implements ProjectDiffFile, DiffStatus {
   }
 
   diffStatusTextCalc(): DiffStatusText {
-    return this.content.some((l) => l.diffStatusLine() !== 'both');
+    return this.content.some((l) => l.diffStatusLine !== 'both');
   }
 }
 
 export class LineWithValuesModel implements LineWithValues {
   _line: LineWithValues;
   tokens: TokenWithTrace[] | undefined;
+  diffStatusLine: DiffStatusLine;
 
   constructor(line: LineWithValues) {
     this._line = line;
-    this.tokens = line.tokens?.map((t) => new TokenWithTrace(t));
+    this.diffStatusLine = this.diffStatusLineCalc();
+    this.tokens = line.tokens?.map((t) => new TokenWithTrace(t, this.diffStatusLine));
   }
 
   get value() {
@@ -60,7 +62,7 @@ export class LineWithValuesModel implements LineWithValues {
     return this._line.lineno2;
   }
 
-  diffStatusLine(): DiffStatusLine {
+  diffStatusLineCalc(): DiffStatusLine {
     return !this.lineno1 ? 'l2only' : !this.lineno2 ? 'l1only' : 'both';
   }
 }

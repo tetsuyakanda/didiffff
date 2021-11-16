@@ -39,9 +39,7 @@ const nullToken: TokenWithTrace = {
   endColumn: undefined,
   value1: undefined,
   value2: undefined,
-  diffStatus: function (): DiffStatusToken {
-    return 'noDiff';
-  },
+  diffStatus: 'noDiff',
 };
 
 function App() {

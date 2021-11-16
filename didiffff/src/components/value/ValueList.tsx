@@ -49,14 +49,12 @@ const ValueList2 = ({ selectedToken }: Props) => {
 
 const ValueList = () => {
   const { selectedToken } = useContext(SelectedToken);
-
   if (selectedToken) {
-    const newStatus = selectedToken.diffStatus();
     const result = (
       <>
         <div>Token: {selectedToken.image} </div>
         <div>
-          Status: <Status tokenType={newStatus}>{newStatus}</Status>
+          Status: <Status tokenType={selectedToken.diffStatus}>{selectedToken.diffStatus}</Status>
         </div>
         <Values>
           <ValueList1 selectedToken={selectedToken} />

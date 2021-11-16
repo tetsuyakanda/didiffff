@@ -5,7 +5,7 @@ import MyPanel from 'components/atoms/MyPanel';
 
 const FilePath = () => {
   const { selectedFile } = useContext(SelectedFile);
-  return <MyPanel>{selectedFile.join('/') || 'not selected'} </MyPanel>;
+  return <MyPanel>{selectedFile.join('/') || 'not selected'}</MyPanel>;
 };
 
 export default FilePath;

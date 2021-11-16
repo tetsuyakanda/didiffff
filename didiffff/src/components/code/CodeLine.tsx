@@ -38,12 +38,11 @@ const DL = styled.div<LineType>(
 
 interface TokensProps {
   tokens: TokenWithTrace[];
-  lineType: DiffStatusLine;
 }
 
 // https://github.com/k-shimari/nod4j/blob/3f8dd202dc68f38a07e92098ef62a165cdaf8821/src/main/frontend/src/app/components/sourcecode/line.tsx#L25
 const Tokens = (props: TokensProps) => {
-  const { tokens, lineType } = props;
+  const { tokens } = props;
   const result: JSX.Element[] = [];
   let preEndColumn = 0;
   let c = 0;
@@ -54,20 +53,20 @@ const Tokens = (props: TokensProps) => {
     if (delta > 0) {
       result.push(<SpaceToken length={delta} key={c++} />);
     }
-    result.push(<ClickableToken token={token} lineType={lineType} key={c++} />);
+    result.push(<ClickableToken token={token} key={c++} />);
     preEndColumn = endColumn;
   }
   return <span>{result}</span>;
 };
 
 const CodeLine = ({ line }: Props) => {
-  const diffStatusLine = line.diffStatusLine();
+  const diffStatusLine = line.diffStatusLine;
   const { lineno1, lineno2, tokens } = line;
   return (
     <DL lineType={diffStatusLine}>
       <LineNo>{lineno1}</LineNo>
       <LineNo>{lineno2}</LineNo>
-      {tokens ? <Tokens tokens={tokens} lineType={diffStatusLine} /> : ' '}
+      {tokens ? <Tokens tokens={tokens} /> : ' '}
     </DL>
   );
 };
