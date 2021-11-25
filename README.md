@@ -1,11 +1,11 @@
 # didiffff
 
-This is a viwer for execution traces of Java application. This document is under constructing.
+This is a viewer for execution traces of Java application. This document is under constructing.
 
 ## Requirements
 
   * Node.js
-  * Java Rutime Environment (to run NOD4J post processor)
+  * Java Runtime Environment (to run NOD4J post processor)
 
   We have tested with Node16 and Java8.
 
@@ -46,7 +46,7 @@ see also: ["Post Processor Usage" section of NOD4J](https://github.com/k-shimari
 Change (or checkout) source code and get its execution trace, then convert with NOD4J post processor.
 Fix the output directory to `<CLOENED_ROOT>/didifff/public/assets/proj2`.
 
-## calc diff
+### calc diff
 
 ```sh
 $ cd <CLOENED_ROOT>/didifff
@@ -55,12 +55,18 @@ $ npm run load
 ```
 
 Run `npm install` to get required modules for the viewer.
-Next, run `npm run load` to compare and convine two execution traces. The result is output to  `<CLOENED_ROOT>/didifff/public/assets/target.json"`
+Next, run `npm run load` to compare and combine two execution traces. The result is output to  `<CLOENED_ROOT>/didifff/public/assets/target.json"`
 
-## launch the viewer
+### launch the viewer
 
 ```sh
 $ npm run start
 ```
 
 Access `localhost:8000` on Web browser. You can now investigate the changes in code and execution traces.
+
+## FAQ
+
+### How to pronoun "didifff" ?
+The author played on words and did not consider the pronunciation.
+However, he is Japanese and he usually pronoun "diff" like "di-fu" so maybe he wanted to name this tool as "di-di-fu-fu".
