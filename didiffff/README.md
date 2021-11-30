@@ -1,46 +1,58 @@
-# Getting Started with Create React App
+# didiffff viewer component
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## How to run
 
-## Available Scripts
+```sh
+npm run start
+```
 
-In the project directory, you can run:
+For details, see [didiffff document](../README.md).
 
-### `npm start`
+## Viewer
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### File Tree View
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+### Source Code View
 
-### `npm test`
+[Screenshot of Source code View](./doc/sourcecodeview.png)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Added and deleted lines are highlighted.
 
-### `npm run build`
+Variable tokens which have at least one value list are highlighted.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Mainly you can check "Diff in length" and "Diff in conents" to investigate how the code changes affects the execution.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+#### No diff in trace
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+![nodiff](./doc/nodiff.png)
 
-### `npm run eject`
+The type is a primitive or String, and they have exactly the same contents.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+#### Trace 1 only and Trace 2 only
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+![nodiff](./doc/t1only.png)
+![nodiff](./doc/t2only.png)
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+The variable is included in an "added" or a "deleted" line.
+You can still check the value list by clicking it, but no comparison results are available.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+#### Same Length Object
 
-## Learn More
+![nodiff](./doc/samelengthobject.png)
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+The type is not a primitive nor String, and the length of two value lists is the same.
+The tool cannot compare the contents.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+#### Diff in Length
+
+![nodiff](./doc/diffinlength.png)
+
+The length of two value lists is different. There might be changes in execution path or the number of repetitions is changed.
+
+#### Diff in Contents
+
+![nodiff](./doc/diffincontents.png)
+
+The type is a primitive or String, and the length of two value lists is the same, but they have different contents.
+
+### Value List View

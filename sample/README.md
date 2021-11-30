@@ -8,6 +8,7 @@ The detail of debugging target is described in [here](https://github.com/k-shima
 
 * Node.js
 * Java Runtime Environment (to run NOD4J post processor)
+* Apache Maven
 
   We have tested with Node16 and Java8.
 
@@ -24,10 +25,16 @@ cd ../didifff
 npm install
 ```
 
-You also need NOD4J trace recorder and NOD4J post processor.
-Download trace recorder from [SELogger repository](https://github.com/takashi-ishio/selogger/).
-Post processor is bundled in didiffff repository.
+You also need NOD4J trace recorder `selogger-0.2.3.jar` and NOD4J post processor `nod4j-0.2.3-t.jar`.
+Download trace recorder from [SELogger repository](https://github.com/takashi-ishio/selogger/releases/tag/v0.2.3).
+Post processor is bundled in the top directory of this repository.
 Copy `selogger-0.2.3.jar` and `nod4j-0.2.3-t.jar` to `<CLOENED_ROOT>/sample/`.
+
+```sh
+cd <CLOENED_ROOT>/sample
+curl -OL https://github.com/takashi-ishio/selogger/releases/tag/v0.2.3
+cp ../nod4j-0.2.3-t.jar .
+```
 
 ## Getting trace (1)
 
@@ -77,7 +84,7 @@ npm run load
 ```
 
 Run `npm run load` to compare and combine two execution traces.
-The result is output to  `<CLOENED_ROOT>/didifff/public/assets/target.json`
+The result is output to  `<CLOENED_ROOT>/didifff/public/assets/target.json`.
 
 ## Launch the viewer
 

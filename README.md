@@ -13,7 +13,7 @@ This is a viewer for execution traces of Java application. This document is unde
 
 (To understand how to get execution trace from your Java application, see also [SELogger repository](https://github.com/takashi-ishio/selogger/) and [NOD4J repository](https://github.com/k-shimari/nod4j).)
 
-Tutorial with demo project is available on [sampleproject directory](./sampleproject/)
+Tutorial with demo project is available on [sampleproject directory](./sample/)
 
 ### Prepare
 
@@ -28,12 +28,21 @@ cd <CLOENED_ROOT>/didifff
 npm install
 ```
 
-You also need NOD4J trace recorder and NOD4J post processor.
-Download trace recorder from [SELogger repository](https://github.com/takashi-ishio/selogger/) and post processor from [NOD4J repository](https://github.com/k-shimari/nod4j).
+You also need NOD4J trace recorder `selogger-0.2.3.jar` and NOD4J post processor `nod4j-0.2.3-t.jar`.
+Download trace recorder from [SELogger repository](https://github.com/takashi-ishio/selogger/releases/tag/v0.2.3).
+Post processor is available on [NOD4J repository](https://github.com/k-shimari/nod4j).
 
  (2011/11/26) Note that NOD4J version 0.2.3 has some problem on handling method parameters so use bundled version in this repository (`nod4j-0.2.3-t.jar`) instead.
 
 ### Getting trace
+
+If you already know how to get a execution trace with SELogger and NOD4J, please prepare two execution traces before and after the code changes.
+
+Then, put them into the directory `<CLOENED_ROOT>/didifff/public/assets/proj1` (the trace BEFORE code changes) and `<CLOENED_ROOT>/didifff/public/assets/proj2` (the trace AFTER code changes).
+
+You can [skip reading this section](#Calc-diff-of-two-execution-traces).
+
+#### Getting a first trace
 
 Run the target Java application with SELogger.
 
@@ -48,7 +57,7 @@ see also:
 * ["Trace Recorder Usage" section of NOD4J](https://github.com/k-shimari/nod4j#trace-recorder-usage)
 * ["Usage" section of SELogger](https://github.com/takashi-ishio/selogger/tree/v0.2.3#usage)
 
-### Convert
+#### Convert
 
 Run NOD4J post processor (`nod4j.jar`).
 
@@ -62,7 +71,7 @@ Since NOD4J post processor requires the source code of the execution trace, you 
 
 see also: ["Post Processor Usage" section of NOD4J](https://github.com/k-shimari/nod4j#post-processor-usage)
 
-### Getting another trace
+#### Getting another trace
 
 Change (or checkout) source code and get its execution trace, then convert with NOD4J post processor.
 Fix the output directory to `<CLOENED_ROOT>/didifff/public/assets/proj2`.
