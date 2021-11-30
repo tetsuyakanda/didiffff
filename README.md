@@ -24,7 +24,7 @@ After that, get required modules for the viewer.
 git clone https://github.com/tetsuyakanda/didiffff
 cd <CLOENED_ROOT>/kurakuraberuberu
 npm install
-cd <CLOENED_ROOT>/didifff
+cd <CLOENED_ROOT>/didiffff
 npm install
 ```
 
@@ -38,7 +38,7 @@ Post processor is available on [NOD4J repository](https://github.com/k-shimari/n
 
 If you already know how to get a execution trace with SELogger and NOD4J, please prepare two execution traces before and after the code changes.
 
-Then, put them into the directory `<CLOENED_ROOT>/didifff/public/assets/proj1` (the trace BEFORE code changes) and `<CLOENED_ROOT>/didifff/public/assets/proj2` (the trace AFTER code changes).
+Then, put them into the directory `<CLOENED_ROOT>/didiffff/public/assets/proj1` (the trace BEFORE code changes) and `<CLOENED_ROOT>/didiffff/public/assets/proj2` (the trace AFTER code changes).
 
 You can [skip reading this section](#Calc-diff-of-two-execution-traces).
 
@@ -62,10 +62,10 @@ see also:
 Run NOD4J post processor (`nod4j.jar`).
 
 ```sh
-java -jar nod4j-0.2.3-t.jar /path/to/<PROJECT_SRC> /path/to/<EXECUTION_TRACE> <CLOENED_ROOT>/didifff/public/assets/proj1
+java -jar nod4j-0.2.3-t.jar /path/to/<PROJECT_SRC> /path/to/<EXECUTION_TRACE> <CLOENED_ROOT>/didiffff/public/assets/proj1
 ```
 
-You can find `fileinfo.json` and `varinfo.json` under `<CLOENED_ROOT>/didifff/public/assets/proj1`.
+You can find `fileinfo.json` and `varinfo.json` under `<CLOENED_ROOT>/didiffff/public/assets/proj1`.
 
 Since NOD4J post processor requires the source code of the execution trace, you must run the post processor before you change the code to get another trace.
 
@@ -74,7 +74,7 @@ see also: ["Post Processor Usage" section of NOD4J](https://github.com/k-shimari
 #### Getting another trace
 
 Change (or checkout) source code and get its execution trace, then convert with NOD4J post processor.
-Fix the output directory to `<CLOENED_ROOT>/didifff/public/assets/proj2`.
+Fix the output directory to `<CLOENED_ROOT>/didiffff/public/assets/proj2`.
 
 ### Calc diff of two execution traces
 
@@ -84,7 +84,7 @@ npm run load
 ```
 
 Run `npm run load` to compare and combine two execution traces.
-The result is output to  `<CLOENED_ROOT>/didifff/public/assets/target.json`
+The result is output to  `<CLOENED_ROOT>/didiffff/public/assets/target.json`
 
 ### Launch the viewer
 
@@ -100,7 +100,7 @@ see [README.md of didiffff/didiffff](./didiffff/README.md)
 
 ## FAQ
 
-### How to pronoun "didifff" ?
+### How to pronoun "didiffff" ?
 
 The author played on words and did not consider the pronunciation.
 However, he is Japanese and he usually pronoun "diff" like "di-fu" so maybe he wanted to name this tool as "di-di-fu-fu".

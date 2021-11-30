@@ -21,7 +21,7 @@ After that, get required modules for the viewer.
 git clone https://github.com/tetsuyakanda/didiffff
 cd didiffff/kurakuraberuberu
 npm install
-cd ../didifff
+cd ../didiffff
 npm install
 ```
 
@@ -52,10 +52,10 @@ We can find the execution trace in `<CLOENED_ROOT>/sample/selogger`.
 
 ```sh
 cd <CLOENED_ROOT>/sample/
-java -jar nod4j-0.2.3-t.jar ./project/ ./selogger/ ../didifff/public/assets/proj1
+java -jar nod4j-0.2.3-t.jar ./project/ ./selogger/ ../didiffff/public/assets/proj1
 ```
 
-You can find `fileinfo.json` and `varinfo.json` under `<CLOENED_ROOT>/didifff/public/assets/proj1/`.
+You can find `fileinfo.json` and `varinfo.json` under `<CLOENED_ROOT>/didiffff/public/assets/proj1/`.
 
 ## Getting another trace (2)
 
@@ -73,18 +73,18 @@ Don't forget to change the output path to `proj2` to prevent overwriting.
 
 ```sh
 cd <CLOENED_ROOT>/sample/
-java -jar nod4j-0.2.3-t.jar ./project/ ./selogger/ ../didifff/public/assets/proj2
+java -jar nod4j-0.2.3-t.jar ./project/ ./selogger/ ../didiffff/public/assets/proj2
 ```
 
 ## Calc diff of two execution traces
 
 ```sh
-cd <CLOENED_ROOT>/didifff
+cd <CLOENED_ROOT>/didiffff
 npm run load
 ```
 
 Run `npm run load` to compare and combine two execution traces.
-The result is output to  `<CLOENED_ROOT>/didifff/public/assets/target.json`.
+The result is output to  `<CLOENED_ROOT>/didiffff/public/assets/target.json`.
 
 ## Launch the viewer
 
