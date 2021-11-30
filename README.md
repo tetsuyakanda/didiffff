@@ -58,7 +58,7 @@ java -jar nod4j-0.2.3-t.jar /path/to/<PROJECT_SRC> /path/to/<EXECUTION_TRACE> <C
 
 You can find `fileinfo.json` and `varinfo.json` under `<CLOENED_ROOT>/didifff/public/assets/proj1`.
 
-Since NOD4J post processor requires the source code of the execution tracem you must run the post processor before you change the code to get another trace.
+Since NOD4J post processor requires the source code of the execution trace, you must run the post processor before you change the code to get another trace.
 
 see also: ["Post Processor Usage" section of NOD4J](https://github.com/k-shimari/nod4j#post-processor-usage)
 
@@ -85,7 +85,7 @@ The result is output to  `<CLOENED_ROOT>/didifff/public/assets/target.json`
 npm run start
 ```
 
-Access `localhost:8000` on Web browser. You can now investigate the changes in code and execution traces.
+Access `localhost:3000` on Web browser. You can now investigate the changes in code and execution traces.
 
 ## Viewer details
 

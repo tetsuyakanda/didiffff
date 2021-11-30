@@ -87,5 +87,5 @@ The result is output to  `<CLOENED_ROOT>/didifff/public/assets/target.json`
 npm run start
 ```
 
-Access `localhost:8000` on Web browser. You can now investigate the changes in code and execution traces.
+Access `localhost:3000` on Web browser. You can now investigate the changes in code and execution traces.
 
