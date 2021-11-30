@@ -44,7 +44,7 @@ export function createVarValueData(data: VarListJsonData, path: string, tokens: 
       const tokenId = computeTokenId(d, tokens);
       result[tokenId] = item;
     } catch (e) {
-      console.log('Cannot compute token id.');
+      // console.log('Cannot compute token id.');
     }
   }
   // console.log(result);

@@ -79,8 +79,6 @@ npm run load
 Run `npm run load` to compare and combine two execution traces.
 The result is output to  `<CLOENED_ROOT>/didifff/public/assets/target.json`
 
-(Note: many warning messages "Cannot compute token ID" will be displayed. They are for debugging so you can ignore the messages. We are working on that issue.)
-
 ## Launch the viewer
 
 ```sh
