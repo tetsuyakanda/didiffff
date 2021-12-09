@@ -79,7 +79,7 @@ Fix the output directory to `<CLOENED_ROOT>/didiffff/public/assets/proj2`.
 ### Calc diff of two execution traces
 
 ```sh
-cd <CLOENED_ROOT>/didifff
+cd <CLOENED_ROOT>/didiffff
 npm run load
 ```
 

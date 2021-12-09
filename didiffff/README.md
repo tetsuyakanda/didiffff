@@ -12,13 +12,16 @@ For details, see [didiffff document](../README.md).
 
 ### File Tree View
 
+[Screenshot of File Tree View](./doc/filetreeview.png)
+
 ### Source Code View
 
-[Screenshot of Source code View](./doc/sourcecodeview.png)
+[Screenshot of Source Code View](./doc/sourcecodeview.png)
 
+This view shows the source code of selected file.
 Added and deleted lines are highlighted.
 
-Variable tokens which have at least one value list are highlighted.
+Variable tokens which have at least one value list are highlighted as following category.
 
 Mainly you can check "Diff in length" and "Diff in conents" to investigate how the code changes affects the execution.
 
@@ -56,3 +59,5 @@ The length of two value lists is different. There might be changes in execution 
 The type is a primitive or String, and the length of two value lists is the same, but they have different contents.
 
 ### Value List View
+
+[Screenshot of Value List View](./doc/valuelitsview.png)

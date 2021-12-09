@@ -92,5 +92,37 @@ The result is output to  `<CLOENED_ROOT>/didiffff/public/assets/target.json`.
 npm run start
 ```
 
-Access `localhost:3000` on Web browser. You can now investigate the changes in code and execution traces.
+Access `localhost:3000` on Web browser.
 
+![overview](./doc/overview.png)
+
+## File Tree View
+
+![filetree](./doc/filetree.png)
+
+Directories and files have two indicators.
+The first (green) one represents there are differences in code and the second (purple) one represents there are differences in execution traces.
+
+Now you can see both indicators of `for_build1` directory are colored.
+Click "+" mark and find `Main.java` in `for_build1/src/sample` directory.
+You can also see that other directories have no differences in code and in execution traces.
+
+Select `Main.java` and go to next step.
+
+## Source Code View
+
+![sourcecode](./doc/sourcecode.png)
+
+Firstly you can find that line 11 has been changed.
+Looking at line 8, all arguments have exactly the same trace so we can see that inputs of this method are the same before and after the code changes.
+
+## Value List View
+
+![valuelist](./doc/valuelist.png)
+
+Now let us see the changes in the value list caused by code changes.
+Click the variable `max` on line 12 then the value list view is updated.
+The view shows the category and its value lists.
+We can see that the length of value lists are different, which is caused by code changes on line 11.
+Using this view, we can compare the detailed difference of two executions.
+You can click and see other variables for further investigation.
