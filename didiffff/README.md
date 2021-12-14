@@ -14,6 +14,10 @@ For details, see [didiffff document](../README.md).
 
 [Screenshot of File Tree View](./doc/filetreeview.png)
 
+Directories and files have two indicators.
+
+The first (green) one represents there are differences in code and the second (purple) one represents there are differences in execution traces.
+
 ### Source Code View
 
 [Screenshot of Source Code View](./doc/sourcecodeview.png)
