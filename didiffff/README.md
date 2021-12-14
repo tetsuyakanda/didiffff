@@ -61,3 +61,9 @@ The type is a primitive or String, and the length of two value lists is the same
 ### Value List View
 
 [Screenshot of Value List View](./doc/valuelitsview.png)
+
+This view shows the following information.
+
+- Token name
+- Category
+- Value lists
