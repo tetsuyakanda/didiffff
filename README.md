@@ -13,7 +13,7 @@ This is a viewer for execution traces of Java application. This document is unde
 
 (To understand how to get execution trace from your Java application, see also [SELogger repository](https://github.com/takashi-ishio/selogger/) and [NOD4J repository](https://github.com/k-shimari/nod4j).)
 
-Tutorial with demo project is available on [sampleproject directory](./sample/)
+Tutorial with demo project is available on [sample directory](./sample/)
 
 ### Prepare
 
