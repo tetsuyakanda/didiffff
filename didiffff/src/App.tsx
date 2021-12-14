@@ -7,7 +7,6 @@ import '@fontsource/dejavu-mono';
 import theme from 'theme';
 import MainView from 'components/view/MainView';
 import { TokenWithTrace } from 'ddapi/token';
-import { DiffStatusToken } from 'ddapi/diffStatus';
 import { TokenWithValues } from 'kurakuraberuberu';
 
 // declare module '@mui/styles/defaultTheme' {
