@@ -14,15 +14,15 @@
   "author": "Kanda, Tetsuya <t-kanda@ist.osaka-u.ac.jp>",
   "license": "MIT",
   "dependencies": {
-    "chevrotain": "^9.1.0",
+    "chevrotain": "^10.0.0",
     "diff": "^5.0.0",
-    "java-parser": "^2.0.0",
+    "java-parser": "^2.0.1",
     "typescript": "^4.5.4"
   },
   "devDependencies": {
-    "@types/diff": "^5.0.1",
-    "@types/node": "^16.11.12",
-    "eslint": "^8.4.1",
+    "@types/diff": "^5.0.2",
+    "@types/node": "^17.0.8",
+    "eslint": "^8.7.0",
     "eslint-config-prettier": "^8.3.0",
     "prettier": "^2.5.1"
   },
