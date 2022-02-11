@@ -4,10 +4,13 @@ This is a viewer for execution traces of Java application. This document is unde
 
 ## Requirements
 
-* Node.js
-* Java Runtime Environment (to run NOD4J post processor)
-
-  We have tested with Node16 and Java8.
+* Node.js `>= Node v14`
+* Java Runtime Environment `>= Java 8`
+* NOD4J trace recorder `selogger-0.2.3.jar`
+  * [SELogger repository](https://github.com/takashi-ishio/selogger/releases/tag/v0.2.3)
+* NOD4J post processor `nod4j-0.2.3-t.jar`
+  * [NOD4J repository](https://github.com/k-shimari/nod4j)
+  * (2011/11/26) Note that NOD4J version 0.2.3 has some problem on handling method parameters so use bundled version in this repository (`nod4j-0.2.3-t.jar`) instead.
 
 ## How to launch the viewer
 
@@ -28,13 +31,7 @@ cd <CLOENED_ROOT>/didiffff
 npm install
 ```
 
-You also need NOD4J trace recorder `selogger-0.2.3.jar` and NOD4J post processor `nod4j-0.2.3-t.jar`.
-Download trace recorder from [SELogger repository](https://github.com/takashi-ishio/selogger/releases/tag/v0.2.3).
-Post processor is available on [NOD4J repository](https://github.com/k-shimari/nod4j).
-
- (2011/11/26) Note that NOD4J version 0.2.3 has some problem on handling method parameters so use bundled version in this repository (`nod4j-0.2.3-t.jar`) instead.
-
-### Getting trace
+### Getting execution traces
 
 If you already know how to get a execution trace with SELogger and NOD4J, please prepare two execution traces before and after the code changes.
 

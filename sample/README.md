@@ -8,7 +8,7 @@ The detail of debugging target is described in [here](https://github.com/k-shima
 
 * Node.js
 * Java Runtime Environment (to run NOD4J post processor)
-* Apache Maven
+* Apache Maven (to build and test an example project.)
 
   We have tested with Node16 and Java8.
 
@@ -25,18 +25,15 @@ cd ../didiffff
 npm install
 ```
 
-You also need NOD4J trace recorder `selogger-0.2.3.jar` and NOD4J post processor `nod4j-0.2.3-t.jar`.
-Download trace recorder from [SELogger repository](https://github.com/takashi-ishio/selogger/releases/tag/v0.2.3).
-Post processor is bundled in the top directory of this repository.
-Copy `selogger-0.2.3.jar` and `nod4j-0.2.3-t.jar` to `<CLOENED_ROOT>/sample/`.
+Copy `selogger-0.2.3.jar`, NOD4J trace recorder, and `nod4j-0.2.3-t.jar`, NOD4J post processor, to `<CLOENED_ROOT>/sample/`.
 
 ```sh
 cd <CLOENED_ROOT>/sample
-curl -OL https://github.com/takashi-ishio/selogger/releases/tag/v0.2.3
+curl -OL https://github.com/takashi-ishio/selogger/releases/download/v0.2.3/selogger-0.2.3.jar
 cp ../nod4j-0.2.3-t.jar .
 ```
 
-## Getting trace (1)
+## Getting execution trace (1)
 
 Run the sample project with SELogger.
 Settings are already described in `pom.xml` so you can get the execution trace by running `mvn test` command.
