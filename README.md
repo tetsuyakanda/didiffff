@@ -2,6 +2,8 @@
 
 This is a viewer for execution traces of Java application. This document is under constructing.
 
+Tutorial with demo project is available on [sample directory](./sample/)
+
 ## Requirements
 
 * Node.js `>= Node v14`
@@ -10,13 +12,11 @@ This is a viewer for execution traces of Java application. This document is unde
   * [SELogger repository](https://github.com/takashi-ishio/selogger/releases/tag/v0.2.3)
 * NOD4J post processor `nod4j-0.2.3-t.jar`
   * [NOD4J repository](https://github.com/k-shimari/nod4j)
-  * (2011/11/26) Note that NOD4J version 0.2.3 has some problem on handling method parameters so use bundled version in this repository (`nod4j-0.2.3-t.jar`) instead.
+  * (2011/11/26) Note that NOD4J version 0.2.3 has some problem on handling method parameters so use a bundled version in this repository (`nod4j-0.2.3-t.jar`) instead.
 
 ## How to launch the viewer
 
 (To understand how to get execution trace from your Java application, see also [SELogger repository](https://github.com/takashi-ishio/selogger/) and [NOD4J repository](https://github.com/k-shimari/nod4j).)
-
-Tutorial with demo project is available on [sample directory](./sample/)
 
 ### Prepare
 
@@ -32,6 +32,8 @@ npm install
 ```
 
 ### Getting execution traces
+
+#### If you are already familiar with SELogger and NOD4J
 
 If you already know how to get a execution trace with SELogger and NOD4J, please prepare two execution traces before and after the code changes.
 
@@ -70,7 +72,7 @@ see also: ["Post Processor Usage" section of NOD4J](https://github.com/k-shimari
 
 #### Getting another trace
 
-Change (or checkout) source code and get its execution trace, then convert with NOD4J post processor.
+Edit source code and get its execution trace, then convert with NOD4J post processor.
 Fix the output directory to `<CLOENED_ROOT>/didiffff/public/assets/proj2`.
 
 ### Calc diff of two execution traces
