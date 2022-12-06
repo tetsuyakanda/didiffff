@@ -4,6 +4,9 @@ This is a viewer for execution traces of Java application. This document is unde
 
 Tutorial with demo project is available on [sample directory](./sample/)
 
+* Tool demo paper: Tetsuya Kanda, Kazumasa Shimari, Katsuro Inoue: "didiffff: A Viewer for Comparing Changes in both Code and Execution Traces",
+The 30th International Conference on Program Comprehension (ICPC 2022), pp.528-532, Online, May 2022 DOI: [10.1145/3524610.3527877](https://doi.org/10.1145/3524610.3527877)
+
 ## Requirements
 
 * Node.js `>= Node v14`
